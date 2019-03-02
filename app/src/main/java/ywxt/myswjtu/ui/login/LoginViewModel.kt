@@ -1,35 +1,27 @@
 package ywxt.myswjtu.ui.login
 
-import android.annotation.SuppressLint
 import android.app.Application
-import android.content.Context
 import android.graphics.Bitmap
-import android.media.Image
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.alibaba.android.arouter.launcher.ARouter
 import io.reactivex.Flowable
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import org.kodein.di.Kodein
-import org.kodein.di.android.support.AndroidLifecycleScope
-import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
-import org.kodein.di.generic.scoped
-import org.kodein.di.generic.singleton
-import ywxt.myswjtu.common.viewmodels.BaseViewModel
 import ywxt.myswjtu.checkers.LoginChecker
 import ywxt.myswjtu.common.exceptions.LoginException
+import ywxt.myswjtu.common.viewmodels.BaseViewModel
 import ywxt.myswjtu.managers.UserManager
+import ywxt.myswjtu.modules.PATH_ROUTE_MAIN
 
 class LoginViewModel(application: Application) : BaseViewModel(application) {
     override val kodein: Kodein = parentKodein
 
     private val loginChecker by instance<LoginChecker>()
     private val userManager by instance<UserManager>()
-
+    private val router by instance<ARouter>()
+    
     val username: MutableLiveData<String> = MutableLiveData()
     val password: MutableLiveData<String> = MutableLiveData()
     val verifyCode: MutableLiveData<String> = MutableLiveData()
@@ -50,7 +42,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
                     Log.i("Login.Init", "success")
                     if (it is Bitmap) verifyImage.value = it
-                }, 
+                },
                 {
                     Log.i("Login.Init", it.message)
                 }
@@ -58,12 +50,15 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
     }
 
     fun login() {
-        if (!checkUsername() || !checkPassword() ||!checkVerifyCode()) return
+        if (!checkUsername() || !checkPassword() || !checkVerifyCode()) return
         Log.i("LoginViewModel", "login")
         userManager.login(username.value!!, password.value!!, verifyCode.value!!)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 Log.i("Login.OnNext", it.getOrDefault(""))
+                userManager.isSigned = true
+                //登录成功后跳到主页面
+                router.build(PATH_ROUTE_MAIN).navigation()
             }, {
                 if (it is LoginException)
                     Log.i("Login.OnError", "${it.message}   ${it.code}")
@@ -111,6 +106,5 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
     }
 
-    
 
 }

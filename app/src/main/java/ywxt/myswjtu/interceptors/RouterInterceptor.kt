@@ -1,0 +1,39 @@
+package ywxt.myswjtu.interceptors
+
+import android.content.Context
+import com.alibaba.android.arouter.facade.Postcard
+import com.alibaba.android.arouter.facade.annotation.Interceptor
+import com.alibaba.android.arouter.facade.callback.InterceptorCallback
+import com.alibaba.android.arouter.facade.template.IInterceptor
+import com.alibaba.android.arouter.launcher.ARouter
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
+import ywxt.myswjtu.common.exceptions.NotLoggedInException
+import ywxt.myswjtu.managers.UserManager
+import ywxt.myswjtu.modules.NAME_INTERCEPTOR_MAIN
+import ywxt.myswjtu.modules.NAME_ROUTE_MAIN
+import ywxt.myswjtu.modules.PATH_ROUTE_LOGIN
+
+@Interceptor(priority = 10, name = NAME_INTERCEPTOR_MAIN)
+class RouterInterceptor : IInterceptor {
+    private lateinit var context: Context
+    private val kodein by kodein(context)
+    private val userManager: UserManager by kodein.instance()
+    private val router:ARouter by kodein.instance()
+    override fun process(postcard: Postcard?, callback: InterceptorCallback?) {
+        if (postcard?.name != NAME_ROUTE_MAIN) callback?.onContinue(postcard)
+        postcard?.let {
+            if (userManager.isSigned) {
+                callback?.onContinue(it)
+            }else{
+                callback?.onInterrupt(NotLoggedInException("尚未登录"))
+                router.build(PATH_ROUTE_LOGIN).navigation(context)
+            }
+        }
+    }
+
+    override fun init(context: Context?) {
+        if (context == null) return
+        this.context = context
+    }
+}

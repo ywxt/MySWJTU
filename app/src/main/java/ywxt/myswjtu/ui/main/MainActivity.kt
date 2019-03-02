@@ -9,11 +9,14 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.alibaba.android.arouter.facade.annotation.Route
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import ywxt.myswjtu.R
+import ywxt.myswjtu.modules.NAME_ROUTE_MAIN
+import ywxt.myswjtu.modules.PATH_ROUTE_MAIN
 import ywxt.myswjtu.ui.login.LoginActivity
-
+@Route(path = PATH_ROUTE_MAIN,name = NAME_ROUTE_MAIN)
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {

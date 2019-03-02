@@ -2,11 +2,12 @@ package ywxt.myswjtu.ui.login
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.alibaba.android.arouter.facade.annotation.Route
 import ywxt.myswjtu.R
+import ywxt.myswjtu.modules.NAME_ROUTE_LOGIN
+import ywxt.myswjtu.modules.PATH_ROUTE_LOGIN
 
-/**
- * A login screen that offers login via email/password.
- */
+@Route(path = PATH_ROUTE_LOGIN,name = NAME_ROUTE_LOGIN)
 class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +25,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        finish()
+    }
+    
     companion object {
         const val TAG = "Login"
     }
