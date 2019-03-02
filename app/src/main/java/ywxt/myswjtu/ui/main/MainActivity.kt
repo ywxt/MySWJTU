@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         nav_view.setNavigationItemSelectedListener(this)
         
-        startActivity(Intent(this,LoginActivity::class.java))
+        
     }
 
     override fun onBackPressed() {

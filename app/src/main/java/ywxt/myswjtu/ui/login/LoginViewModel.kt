@@ -20,8 +20,8 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
     private val loginChecker by instance<LoginChecker>()
     private val userManager by instance<UserManager>()
-    private val router by instance<ARouter>()
-    
+    private val router: ARouter by instance()
+
     val username: MutableLiveData<String> = MutableLiveData()
     val password: MutableLiveData<String> = MutableLiveData()
     val verifyCode: MutableLiveData<String> = MutableLiveData()
@@ -56,8 +56,6 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 Log.i("Login.OnNext", it.getOrDefault(""))
-                userManager.isSigned = true
-                //登录成功后跳到主页面
                 router.build(PATH_ROUTE_MAIN).navigation()
             }, {
                 if (it is LoginException)

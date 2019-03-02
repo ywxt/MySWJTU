@@ -8,27 +8,32 @@ import com.alibaba.android.arouter.facade.template.IInterceptor
 import com.alibaba.android.arouter.launcher.ARouter
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
-import ywxt.myswjtu.common.exceptions.NotLoggedInException
+import ywxt.myswjtu.App
+import ywxt.myswjtu.common.exceptions.NotSignedException
 import ywxt.myswjtu.managers.UserManager
-import ywxt.myswjtu.modules.NAME_INTERCEPTOR_MAIN
-import ywxt.myswjtu.modules.NAME_ROUTE_MAIN
+import ywxt.myswjtu.modules.NAME_INTERCEPTOR_LOGIN
+import ywxt.myswjtu.modules.NAME_ROUTE_LOGIN
 import ywxt.myswjtu.modules.PATH_ROUTE_LOGIN
 
-@Interceptor(priority = 10, name = NAME_INTERCEPTOR_MAIN)
-class RouterInterceptor : IInterceptor {
+@Interceptor(priority = 10, name = NAME_INTERCEPTOR_LOGIN)
+class LoginInterceptor : IInterceptor {
     private lateinit var context: Context
-    private val kodein by kodein(context)
-    private val userManager: UserManager by kodein.instance()
-    private val router:ARouter by kodein.instance()
+    private val kodein by kodein(App.INSTANCE)
+    private val userManager by kodein.instance<UserManager>()
+    private val router by kodein.instance<ARouter>()
     override fun process(postcard: Postcard?, callback: InterceptorCallback?) {
-        if (postcard?.name != NAME_ROUTE_MAIN) callback?.onContinue(postcard)
-        postcard?.let {
-            if (userManager.isSigned) {
-                callback?.onContinue(it)
-            }else{
-                callback?.onInterrupt(NotLoggedInException("尚未登录"))
+        if (postcard?.path == PATH_ROUTE_LOGIN) {
+            callback?.onContinue(postcard) 
+            return
+        }
+        postcard.let {
+            
+            if (!userManager.isSigned) {
+                callback?.onInterrupt(NotSignedException("未登录"))
                 router.build(PATH_ROUTE_LOGIN).navigation(context)
+                return
             }
+            callback?.onContinue(it)
         }
     }
 

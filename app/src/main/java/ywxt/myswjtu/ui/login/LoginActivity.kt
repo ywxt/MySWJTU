@@ -25,9 +25,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        finish()
-    }
     
     companion object {
         const val TAG = "Login"

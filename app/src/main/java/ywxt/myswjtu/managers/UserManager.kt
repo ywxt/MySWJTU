@@ -27,6 +27,7 @@ class UserManager(private val loginService: LoginService) {
             }.subscribeOn(AndroidSchedulers.mainThread())
             .doOnNext {
                 if (it.isFailure) throw it.exceptionOrNull()!!
+                isSigned=true
             }
 
 

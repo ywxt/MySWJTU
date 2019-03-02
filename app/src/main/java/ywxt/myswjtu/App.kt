@@ -26,20 +26,22 @@ class App : Application(), KodeinAware {
 
     override fun onCreate() {
         super.onCreate()
-        if(isApkInDebug()){
-            ARouter.openLog() 
-            ARouter.openDebug() 
+        INSTANCE = this
+        if (isApkInDebug()) {
+            ARouter.openLog()
+            ARouter.openDebug()
         }
         ARouter.init(this)
     }
 
-    private fun isApkInDebug(): Boolean {
-        return try {
-            val info = this.applicationInfo
-            info.flags and  ApplicationInfo.FLAG_DEBUGGABLE != 0
-        } catch (e: Exception) {
-            false
-        }
+    private fun isApkInDebug(): Boolean = try {
+        val info = this.applicationInfo
+        info.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
+    } catch (e: Exception) {
+        false
+    }
 
+    companion object {
+        lateinit var INSTANCE: App
     }
 }

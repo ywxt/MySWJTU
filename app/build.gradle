@@ -35,11 +35,11 @@ kapt {
 }
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    
+
     implementation project(':common')
-    
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    
+
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
@@ -52,12 +52,12 @@ dependencies {
     //ARouter
     implementation 'com.alibaba:arouter-api:1.4.1'
     kapt 'com.alibaba:arouter-compiler:1.2.2'
-    
-    
+
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     // optional - ReactiveStreams support for LiveData
-    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version" // For Kotlin use lifecycle-reactivestreams-ktx
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
+    // For Kotlin use lifecycle-reactivestreams-ktx
     // 基础组件
     implementation 'org.kodein.di:kodein-di-generic-jvm:6.1.0'
     // Android扩展组件
@@ -73,7 +73,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.2-alpha01'
 
     kapt "com.android.databinding:compiler:3.1.4"
-    
+
 }
-
-
