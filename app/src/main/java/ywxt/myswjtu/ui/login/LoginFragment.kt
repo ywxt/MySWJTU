@@ -1,12 +1,15 @@
 package ywxt.myswjtu.ui.login
 
 import androidx.lifecycle.Observer
+import com.alibaba.android.arouter.facade.annotation.Route
 import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
 import ywxt.myswjtu.R
 import ywxt.myswjtu.common.ui.BaseFragment
 import ywxt.myswjtu.databinding.FragmentLoginBinding
+import ywxt.myswjtu.modules.PATH_ROUTE_LOGIN_FRAGMENT
 
+@Route(path = PATH_ROUTE_LOGIN_FRAGMENT)
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     override val layoutId: Int = R.layout.fragment_login
 

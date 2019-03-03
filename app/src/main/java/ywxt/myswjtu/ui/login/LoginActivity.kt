@@ -1,15 +1,20 @@
 package ywxt.myswjtu.ui.login
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
+import org.kodein.di.Kodein
+import org.kodein.di.generic.instance
 import ywxt.myswjtu.R
-import ywxt.myswjtu.modules.NAME_ROUTE_LOGIN
+import ywxt.myswjtu.common.ui.BaseActivity
 import ywxt.myswjtu.modules.PATH_ROUTE_LOGIN
+import ywxt.myswjtu.modules.PATH_ROUTE_LOGIN_FRAGMENT
 
-@Route(path = PATH_ROUTE_LOGIN,name = NAME_ROUTE_LOGIN)
-class LoginActivity : AppCompatActivity() {
-
+@Route(path = PATH_ROUTE_LOGIN)
+class LoginActivity : BaseActivity() {
+    override val kodein: Kodein = parentKodein
+    private val router by instance<ARouter>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -20,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
     private fun initFragment() {
         supportFragmentManager.apply {
             findFragmentByTag(TAG) ?: beginTransaction()
-                .add(R.id.login_container, LoginFragment(), TAG)
+                .add(R.id.login_container, router.build(PATH_ROUTE_LOGIN_FRAGMENT).navigation() as Fragment, TAG)
                 .commitAllowingStateLoss()
         }
     }

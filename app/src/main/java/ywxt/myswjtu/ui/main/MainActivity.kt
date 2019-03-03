@@ -1,22 +1,20 @@
 package ywxt.myswjtu.ui.main
 
-import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
-import androidx.core.view.GravityCompat
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import ywxt.myswjtu.R
-import ywxt.myswjtu.modules.NAME_ROUTE_MAIN
 import ywxt.myswjtu.modules.PATH_ROUTE_MAIN
-import ywxt.myswjtu.ui.login.LoginActivity
-@Route(path = PATH_ROUTE_MAIN,name = NAME_ROUTE_MAIN)
+
+@Route(path = PATH_ROUTE_MAIN)
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {

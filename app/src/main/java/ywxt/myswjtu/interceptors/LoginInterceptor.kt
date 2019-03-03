@@ -12,7 +12,6 @@ import ywxt.myswjtu.App
 import ywxt.myswjtu.common.exceptions.NotSignedException
 import ywxt.myswjtu.managers.UserManager
 import ywxt.myswjtu.modules.NAME_INTERCEPTOR_LOGIN
-import ywxt.myswjtu.modules.NAME_ROUTE_LOGIN
 import ywxt.myswjtu.modules.PATH_ROUTE_LOGIN
 
 @Interceptor(priority = 10, name = NAME_INTERCEPTOR_LOGIN)

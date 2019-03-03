@@ -1,6 +1,7 @@
 package ywxt.myswjtu.ui.login
 
 import android.app.Application
+import android.content.Intent
 import android.graphics.Bitmap
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -56,7 +57,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 Log.i("Login.OnNext", it.getOrDefault(""))
-                router.build(PATH_ROUTE_MAIN).navigation()
+                navigate2Main()
             }, {
                 if (it is LoginException)
                     Log.i("Login.OnError", "${it.message}   ${it.code}")
@@ -103,6 +104,11 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             )
 
     }
-
+    
+    private fun navigate2Main(){
+        router.build(PATH_ROUTE_MAIN)
+            .withFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            .navigation()
+    }
 
 }
