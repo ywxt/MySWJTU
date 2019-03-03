@@ -4,6 +4,7 @@ import android.content.Context
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
+import me.ghui.fruit.converter.retrofit.FruitConverterFactory
 import okhttp3.CookieJar
 import okhttp3.OkHttpClient
 import org.kodein.di.Kodein
@@ -50,6 +51,7 @@ val HttpModule = Kodein.Module(HTTP_MODULE_NAME) {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .addConverterFactory(JaxbConverterFactory.create())
+            .addConverterFactory(FruitConverterFactory.create())
             .build()
     }
 }

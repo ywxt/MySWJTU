@@ -15,6 +15,6 @@ const val SERVICE_MODULE_NAME = "SERVICE_MODULE_NAME"
  */
 val serviceModule = Kodein.Module(SERVICE_MODULE_NAME) {
     bind<LoginService>() with singleton { instance<Retrofit>().create(LoginService::class.java) }
-    bind<UserManager>() with singleton { UserManager(instance()) }
+    bind<UserManager>() with singleton { UserManager(instance(),instance(),instance()) }
     bind<ToastManager>() with singleton { ToastManager(instance()) }
 }

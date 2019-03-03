@@ -48,7 +48,11 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.squareup.retrofit2:converter-jaxb:2.5.0'
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
-
+    
+    //fruit
+    implementation 'me.ghui:fruit-converter-retrofit:1.0.4'
+    implementation 'me.ghui:Fruit:1.0.4'
+    
     //ARouter
     implementation 'com.alibaba:arouter-api:1.4.1'
     kapt 'com.alibaba:arouter-compiler:1.2.2'

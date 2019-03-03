@@ -1,10 +1,9 @@
 package ywxt.myswjtu.services
 
 import io.reactivex.Flowable
-import okhttp3.ResponseBody
-import org.intellij.lang.annotations.Flow
 import retrofit2.http.GET
 import ywxt.myswjtu.models.UserAccountInfoModel
+import ywxt.myswjtu.models.UserInfoModel
 
 interface UserService {
     
@@ -12,10 +11,6 @@ interface UserService {
     fun getUserAccountInfo():Flowable<UserAccountInfoModel>
     
     @GET("UserFramework")
-    fun getUser():Flowable<ResponseBody>
+    fun getUserInfo():Flowable<UserInfoModel>
     
-    @GET("StudentInfoAction?setAction=studentInfoQuery")
-    fun getStudent():Flowable<ResponseBody>
-    @GET("StudentInfoAction?setAction=studentParentInfo")
-    fun getStuentParents():Flowable<ResponseBody>
 }
