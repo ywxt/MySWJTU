@@ -5,7 +5,7 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.kodein.di.Kodein
 import ywxt.myswjtu.R
-import ywxt.myswjtu.common.adapters.FragmentAdapter
+import ywxt.myswjtu.adapters.FragmentAdapter
 import ywxt.myswjtu.common.ui.BaseActivity
 import ywxt.myswjtu.ui.main.main.MainFragment
 import ywxt.myswjtu.ui.main.notification.NotificationFragment

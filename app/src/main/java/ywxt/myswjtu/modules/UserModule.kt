@@ -6,8 +6,8 @@ import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
 import retrofit2.Retrofit
 import ywxt.myswjtu.managers.UserManager
-import ywxt.myswjtu.services.LoginService
-import ywxt.myswjtu.services.UserService
+import ywxt.myswjtu.http.LoginService
+import ywxt.myswjtu.http.UserService
 
 const val USER_MODULE_NAME="USER_MODULE_NAME"
 val  userModule =Kodein.Module(USER_MODULE_NAME){

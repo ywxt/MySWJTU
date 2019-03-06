@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="vm" type="ywxt.myswjtu.models.MainModuleModel"/>
+    </data>
+    <LinearLayout
+                  android:orientation="vertical"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content">
+        <ImageView android:layout_width="24dp"
+                   android:layout_height="24dp"
+                   android:contentDescription="@string/module_icon"
+                   android:imageUrl='@{"file:///android_asset/"+vm.image}'
+                   android:placeholder="@{@drawable/ic_module}"
+                   android:error="@{@drawable/ic_error}"
+        />
+        <TextView android:layout_width="wrap_content" 
+                  android:layout_height="wrap_content"
+                  android:text="@{vm.text}"
+        />
+    </LinearLayout>
+</layout>

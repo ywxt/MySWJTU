@@ -13,8 +13,8 @@ import ywxt.myswjtu.models.LoginInitModel
 import ywxt.myswjtu.models.UserAccountInfoModel
 import ywxt.myswjtu.models.UserInfoModel
 import ywxt.myswjtu.models.UserModel
-import ywxt.myswjtu.services.LoginService
-import ywxt.myswjtu.services.UserService
+import ywxt.myswjtu.http.LoginService
+import ywxt.myswjtu.http.UserService
 
 class UserManager(
     private val loginService: LoginService,

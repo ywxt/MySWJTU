@@ -1,4 +1,4 @@
-package ywxt.myswjtu.services
+package ywxt.myswjtu.http
 
 import io.reactivex.Flowable
 import retrofit2.http.GET

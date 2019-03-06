@@ -1,4 +1,4 @@
-package ywxt.myswjtu.common.adapters
+package ywxt.myswjtu.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
