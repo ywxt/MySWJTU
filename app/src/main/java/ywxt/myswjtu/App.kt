@@ -7,10 +7,7 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.androidCoreModule
 import org.kodein.di.android.support.androidSupportModule
-import ywxt.myswjtu.modules.HttpModule
-import ywxt.myswjtu.modules.checkerModule
-import ywxt.myswjtu.modules.routerModule
-import ywxt.myswjtu.modules.serviceModule
+import ywxt.myswjtu.modules.*
 
 
 class App : Application(), KodeinAware {
@@ -18,7 +15,9 @@ class App : Application(), KodeinAware {
         //bind<Context>() with singleton { this@App }
         import(androidCoreModule(this@App))
         import(androidSupportModule(this@App))
-        import(serviceModule)
+        import(notificationModule)
+        import(storageModule)
+        import(userModule)
         import(HttpModule)
         import(checkerModule)
         import(routerModule)

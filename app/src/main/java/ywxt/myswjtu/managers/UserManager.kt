@@ -2,7 +2,6 @@ package ywxt.myswjtu.managers
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.provider.ContactsContract
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -23,7 +22,7 @@ class UserManager(
     private val toastManager: ToastManager
 ) {
 
-    var isSigned = false
+    var signed = false
 
     val user: UserModel = UserModel(
         MutableLiveData(),
@@ -48,7 +47,7 @@ class UserManager(
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext {
                 if (it.isFailure) throw it.exceptionOrNull()!!
-                isSigned = true
+                signed = true
             }.doOnError {
                 if (it?.message != null)
                     toastManager.toast(it.message!!)

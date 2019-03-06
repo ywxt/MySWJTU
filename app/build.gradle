@@ -16,6 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -26,6 +27,7 @@ android {
     dataBinding {
         enabled = true
     }
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
 }
 
 kapt {
@@ -48,13 +50,17 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.squareup.retrofit2:converter-jaxb:2.5.0'
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
-    
+
     //fruit
     implementation 'me.ghui:fruit-converter-retrofit:1.0.4'
     implementation 'me.ghui:Fruit:1.0.4'
-    
+
     //ARouter
     implementation 'com.alibaba:arouter-api:1.4.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
+    implementation 'androidx.vectordrawable:vectordrawable:1.0.0-beta01'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-beta01'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
     kapt 'com.alibaba:arouter-compiler:1.2.2'
 
     // ViewModel and LiveData
@@ -77,5 +83,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.2-alpha01'
 
     kapt "com.android.databinding:compiler:3.1.4"
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0-rc02'
 
 }

@@ -27,7 +27,7 @@ class LoginInterceptor : IInterceptor {
         }
         postcard.let {
             
-            if (!userManager.isSigned) {
+            if (!userManager.signed) {
                 callback?.onInterrupt(NotSignedException("未登录"))
                 router.build(PATH_ROUTE_LOGIN).navigation(context)
                 return
