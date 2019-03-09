@@ -17,7 +17,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
-        multiDexEnabled = true
+        multiDexEnabled true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -27,6 +27,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //multiDexKeepProguard file('multidex-config.pro')
         }
     }
     dataBinding {
@@ -82,7 +83,7 @@ dependencies {
     // Android扩展组件
     implementation 'org.kodein.di:kodein-di-framework-android-core:6.1.0'
     // v4包的Fragment
-    implementation 'org.kodein.di:kodein-di-framework-android-support:6.1.0'
+    implementation 'org.kodein.di:kodein-di-framework-android-x:6.1.0'
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha02'
     implementation 'androidx.core:core-ktx:1.1.0-alpha04'
     implementation 'com.google.android.material:material:1.1.0-alpha04'
@@ -92,6 +93,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.2-alpha01'
 
     kapt "com.android.databinding:compiler:3.1.4"
-    implementation 'android.arch.navigation:navigation-fragment:1.0.0-rc02'
 
 }

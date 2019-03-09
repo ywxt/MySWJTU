@@ -6,9 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.alibaba.android.arouter.facade.annotation.Route
 
 import ywxt.myswjtu.R
+import ywxt.myswjtu.modules.PATH_ROUTE_MAIN_NOTIFICATION
 
+@Route(path = PATH_ROUTE_MAIN_NOTIFICATION)
 class NotificationFragment : Fragment() {
 
     companion object {

@@ -15,5 +15,6 @@ class SplashActivity : DataBindingActivity<ywxt.myswjtu.databinding.ActivitySpla
     }
     override fun bindViewModel(dataBinding: ActivitySplashBinding) {
         dataBinding.vm=viewModel
+        
     }
 }

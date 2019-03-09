@@ -3,7 +3,7 @@ package ywxt.myswjtu.ui.splash
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
 import org.kodein.di.Kodein
-import org.kodein.di.android.support.AndroidLifecycleScope
+import org.kodein.di.android.x.AndroidLifecycleScope
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.scoped
 import org.kodein.di.generic.singleton

@@ -22,4 +22,5 @@ fun setImageViewImage(imageView: ImageView,imageUrl:String,error: Drawable,place
         .load(imageUrl)
         .placeholder(placeholder)
         .error(error)
+        .into(imageView)
 }

@@ -6,15 +6,15 @@ import com.alibaba.android.arouter.launcher.ARouter
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.androidCoreModule
-import org.kodein.di.android.support.androidSupportModule
+import org.kodein.di.android.x.androidXModule
 import ywxt.myswjtu.modules.*
 
 
 class App : Application(), KodeinAware {
     override val kodein: Kodein = Kodein.lazy {
-        //bind<Context>() with singleton { this@App }
+       // bind<Context>() with singleton { this@App }
         import(androidCoreModule(this@App))
-        import(androidSupportModule(this@App))
+        import(androidXModule(this@App))
         import(notificationModule)
         import(storageModule)
         import(userModule)
@@ -23,6 +23,10 @@ class App : Application(), KodeinAware {
         import(routerModule)
     }
 
+//    override fun attachBaseContext(base: Context?) {
+//        super.attachBaseContext(base)
+//        MultiDex.install(this)
+//    }
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this

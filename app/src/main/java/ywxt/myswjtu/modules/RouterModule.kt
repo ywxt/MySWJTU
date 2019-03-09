@@ -8,6 +8,10 @@ import org.kodein.di.generic.singleton
 const val ROUTER_MODULE_NAME="ROUTER_MODULE_NAME"
 const val PATH_ROUTE_LOGIN="/login/activity"
 const val PATH_ROUTE_MAIN="/main/main"
+const val PATH_ROUTE_MAIN_MAIN="/main/main/main"
+const val PATH_ROUTE_MAIN_SETTING="/main/main/setting"
+const val PATH_ROUTE_MAIN_NOTIFICATION="/main/main/notification"
+const val PATH_ROUTE_MAIN_TIMETABLE="/main/main/timetable"
 const val PATH_ROUTE_LOGIN_FRAGMENT="/login/fragment"
 const val NAME_INTERCEPTOR_LOGIN="LOGIN_INTERCEPTOR"
 val routerModule= Kodein.Module(ROUTER_MODULE_NAME){

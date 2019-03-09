@@ -1,30 +1,42 @@
 package ywxt.myswjtu.ui.main
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.kodein.di.Kodein
+import org.kodein.di.generic.instance
 import ywxt.myswjtu.R
-import ywxt.myswjtu.adapters.FragmentAdapter
+import ywxt.myswjtu.common.adapters.FragmentAdapter
 import ywxt.myswjtu.common.ui.BaseActivity
+import ywxt.myswjtu.modules.*
 import ywxt.myswjtu.ui.main.main.MainFragment
 import ywxt.myswjtu.ui.main.notification.NotificationFragment
 import ywxt.myswjtu.ui.main.setting.SettingFragment
 import ywxt.myswjtu.ui.main.timetable.TimetableFragment
 
+@Route(path = PATH_ROUTE_MAIN)
 class MainActivity : BaseActivity() {
-    
-    override val kodein: Kodein = parentKodein
+
+    override val kodein: Kodein = Kodein.lazy {
+        extend(parentKodein)
+    }
 
     private val viewPager by lazy { findViewById<ViewPager>(R.id.main_viewPager) }
 
-    private val fragmentList = listOf(
-        MainFragment(),
-        TimetableFragment(),
-        NotificationFragment(),
-        SettingFragment()
-    )
-    
+    private val router: ARouter by instance()
+
+    private val fragmentList by lazy {
+        listOf(
+            router.build(PATH_ROUTE_MAIN_MAIN).navigation() as Fragment,
+            router.build(PATH_ROUTE_MAIN_TIMETABLE).navigation() as Fragment,
+            router.build(PATH_ROUTE_MAIN_NOTIFICATION).navigation() as Fragment,
+            router.build(PATH_ROUTE_MAIN_SETTING).navigation() as Fragment
+        )
+    }
+
     private val navigation by lazy { findViewById<BottomNavigationView>(R.id.navigation) }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -53,7 +65,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        viewPager.adapter=FragmentAdapter(fragmentList,supportFragmentManager)
+        viewPager.adapter = FragmentAdapter(fragmentList, supportFragmentManager)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
