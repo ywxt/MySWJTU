@@ -4,7 +4,9 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputLayout
 
 @BindingAdapter("android:imageSrc")
@@ -23,4 +25,9 @@ fun setImageViewImage(imageView: ImageView,imageUrl:String,error: Drawable,place
         .placeholder(placeholder)
         .error(error)
         .into(imageView)
+}
+@BindingAdapter("android:associatedViewPager")
+fun setTabLayoutAssociatedViewPager(tabLayout: TabLayout,viewPager: Int){
+    val vp=tabLayout.findViewById<ViewPager>(viewPager)
+    tabLayout.setupWithViewPager(vp)
 }

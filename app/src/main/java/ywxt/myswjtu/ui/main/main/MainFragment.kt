@@ -20,6 +20,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
     override val layoutId: Int = R.layout.fragment_main
     private val application by instance<Application>()
     private val adapterViewModels by instance<MutableList<MainModuleViewModel>>()
+    private val adapter by instance<MainModuleAdapter>()
     override val kodein: Kodein = Kodein.lazy {
         extend(parentKodein)
         import(mainModule)
@@ -28,9 +29,9 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
     override fun bindViewModel(dataBinding: FragmentMainBinding?) {
         if (dataBinding == null) return
         dataBinding.vm = viewModel
-
+        val modulesView=dataBinding.modulesView
         viewModel.moduleList.observe(this, Observer {
-            if (!adapterViewModels.isNotEmpty()) return@Observer
+            adapterViewModels.clear()
             it.forEach {
                 val vm = MainModuleViewModel(application)
                 vm.apply {
@@ -40,9 +41,9 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
                 }
                 adapterViewModels.add(vm)
             }
+            modulesView.adapter = adapter
         })
-        dataBinding.modulesView.adapter = MainModuleAdapter(adapterViewModels)
-        dataBinding.modulesView.layoutManager = GridLayoutManager(this.context, 5)
+        modulesView.layoutManager = GridLayoutManager(this.context, 5)
     }
 
 

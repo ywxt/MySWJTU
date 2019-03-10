@@ -1,11 +1,14 @@
 package ywxt.myswjtu.ui.main.main
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
 import org.kodein.di.Kodein
 import org.kodein.di.android.x.AndroidLifecycleScope
-import org.kodein.di.generic.*
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.instance
+import org.kodein.di.generic.scoped
+import org.kodein.di.generic.singleton
+import ywxt.myswjtu.adapters.MainModuleAdapter
 
 const val  MAIN_MODULE_NAME="MAIN_MODULE_NAME"
 val mainModule= Kodein.Module(MAIN_MODULE_NAME){
@@ -14,5 +17,8 @@ val mainModule= Kodein.Module(MAIN_MODULE_NAME){
     }
     bind<MutableList<MainModuleViewModel>>() with   scoped<Fragment>(AndroidLifecycleScope).singleton { 
         mutableListOf<MainModuleViewModel>()
+    }
+    bind<MainModuleAdapter>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
+        MainModuleAdapter(instance())
     }
 }

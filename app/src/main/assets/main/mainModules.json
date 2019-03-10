@@ -2,7 +2,8 @@
   {
     "text":"学籍信息",
     "image":"main/images/studentInfo.png",
-    "path":"/main/modules/studentInfo"
+    "path":"/main/modules/studentInfo",
+    ""
   },
   {
     "text":"培养方案",

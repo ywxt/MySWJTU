@@ -14,7 +14,7 @@ import ywxt.myswjtu.modules.PATH_ROUTE_LOGIN_FRAGMENT
 
 @Route(path = PATH_ROUTE_LOGIN)
 class LoginActivity : BaseActivity() {
-    override val kodein: Kodein = Kodein.lazy { 
+    override val kodein: Kodein = Kodein.lazy {
         extend(parentKodein)
     }
     private val router by kodein.instance<ARouter>()
@@ -28,15 +28,15 @@ class LoginActivity : BaseActivity() {
 
     private fun initFragment() {
         supportFragmentManager.apply {
-            findFragmentByTag(TAG) ?: beginTransaction()
-                .add(R.id.login_container, router.build(PATH_ROUTE_LOGIN_FRAGMENT).navigation() as Fragment, TAG)
+            findFragmentByTag(PATH_ROUTE_LOGIN_FRAGMENT) ?: beginTransaction()
+                .add(
+                    R.id.login_container,
+                    router.build(PATH_ROUTE_LOGIN_FRAGMENT).navigation() as Fragment,
+                    PATH_ROUTE_LOGIN_FRAGMENT
+                )
                 .commitAllowingStateLoss()
         }
     }
 
-    
-    companion object {
-        const val TAG = "Login"
-    }
 
 }
