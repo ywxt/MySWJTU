@@ -1,3 +1,4 @@
 -keep class org.kodein.di.android.** { *; } 
 -keep class ywxt.myswjtu.App
 -keep class ywxt.myswjtu.common.ui.BaseActivity
+-keep class ywxt.myswjtu.interceptors.LoginInterceptor

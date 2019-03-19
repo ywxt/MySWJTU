@@ -9,16 +9,17 @@ import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 import ywxt.myswjtu.common.exceptions.LoginException
 import ywxt.myswjtu.common.exceptions.ParamInitException
-import ywxt.myswjtu.models.LoginInitModel
-import ywxt.myswjtu.models.UserAccountInfoModel
-import ywxt.myswjtu.models.UserInfoModel
-import ywxt.myswjtu.models.UserModel
+import ywxt.myswjtu.http.CourseService
+import ywxt.myswjtu.http.HtmlUserService
 import ywxt.myswjtu.http.LoginService
-import ywxt.myswjtu.http.UserService
+import ywxt.myswjtu.http.XmlUserService
+import ywxt.myswjtu.models.*
 
 class UserManager(
     private val loginService: LoginService,
-    private val userService: UserService,
+    private val xmlUserService: XmlUserService,
+    private val htmlUserService: HtmlUserService,
+    private val courseService: CourseService,
     private val toastManager: ToastManager
 ) {
 
@@ -53,7 +54,7 @@ class UserManager(
                     toastManager.toast(it.message!!)
             }
     }
-    
+
     fun getVerifyImage(): Flowable<Bitmap> {
         return loginService.getVerifyImage()
             .subscribeOn(Schedulers.io())
@@ -81,8 +82,8 @@ class UserManager(
 
     fun getUser(): Flowable<UserModel> {
         return Flowable.zip(
-            userService.getUserInfo(),
-            userService.getUserAccountInfo(),
+            htmlUserService.getUserInfo(),
+            xmlUserService.getUserAccountInfo(),
             BiFunction<UserInfoModel, UserAccountInfoModel, UserModel> { userInfoModel, userAccountInfoModel ->
                 user.apply {
                     number.postValue(userInfoModel.number)
@@ -99,6 +100,21 @@ class UserManager(
                 if (it?.message != null)
                     toastManager.toast(it.message!!)
             }
+    }
+
+    fun loadingAfterLogin():Flowable<Boolean>{
+        return loginService.loadingAfterLogin(null,null,null)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { true }
+            .doOnError { toastManager.toast("登录失败") }
+            
+    }
+
+    fun getCourseSchedule(): Flowable<CourseScheduleModel> {
+        return courseService.getCourseSchedule()
+            .subscribeOn(Schedulers.io())
+
     }
 
 }

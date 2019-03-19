@@ -6,24 +6,25 @@
     <data>
         <variable name="vm" type="ywxt.myswjtu.ui.modules.ModuleViewModel"/>
     </data>
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.modules.ModuleActivity">
+            tools:context=".ui.modules.ModuleActivity"
+            android:orientation="vertical">
         <com.google.android.material.appbar.AppBarLayout android:layout_width="match_parent"
-                                                         android:layout_height="wrap_content">
+                                                         android:layout_height="wrap_content"
+                                                         android:theme="@style/AppTheme.AppBarOverlay">
             <androidx.appcompat.widget.Toolbar
                     android:id="@+id/modules_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="@{vm.currentModule.value.text}"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+                    app:title="@{vm.title}"
+                    app:popupTheme="@style/AppTheme.PopupOverlay">
 
             </androidx.appcompat.widget.Toolbar>
             <com.google.android.material.tabs.TabLayout android:layout_width="match_parent"
                                                         android:layout_height="wrap_content"
-                                                        android:associatedViewPager="@{@id/viewPager_module}">
+                                                        android:id="@+id/tab_module">
 
             </com.google.android.material.tabs.TabLayout>
         </com.google.android.material.appbar.AppBarLayout>
@@ -32,5 +33,5 @@
                                              android:id="@+id/viewPager_module">
 
         </androidx.viewpager.widget.ViewPager>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
 </layout>

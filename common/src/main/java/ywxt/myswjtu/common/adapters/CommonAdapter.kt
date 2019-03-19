@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class CommonAdapter<TViewModel:ViewModel,TDataBinding: ViewDataBinding>(
+abstract class CommonAdapter<TViewModel,TDataBinding: ViewDataBinding>(
     private val viewModels: List<TViewModel>
     ) :RecyclerView.Adapter<CommonAdapter.ViewHolder<TViewModel, TDataBinding>>() {
     
@@ -17,7 +17,7 @@ abstract class CommonAdapter<TViewModel:ViewModel,TDataBinding: ViewDataBinding>
         holder.bindViewModel(viewModels[position])
     }
 
-    abstract class ViewHolder<TViewModel:ViewModel,TDataBinding:ViewDataBinding>(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    abstract class ViewHolder<TViewModel,TDataBinding:ViewDataBinding>(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val binding: TDataBinding? = DataBindingUtil.bind(itemView)
 

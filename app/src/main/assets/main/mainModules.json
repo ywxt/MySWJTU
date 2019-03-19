@@ -3,96 +3,135 @@
     "text":"学籍信息",
     "image":"main/images/studentInfo.png",
     "path":"/main/modules/studentInfo",
-    ""
+    "pages":[
+      {
+        "path":"/main/modules/studentInfo/me",
+        "text":"我的信息"
+      },
+      {
+        "path":"/main/modules/studentInfo/parents",
+        "text":"父母信息"
+      }
+    ]
   },
   {
     "text":"培养方案",
     "image":"main/images/studentPlan.png",
-    "path":"/main/modules/studentPlan"
+    "path":"/main/modules/studentPlan",
+    "pages":[
+      {
+        "path":"/main/modules/studentInfo/me",
+        "text":"我的信息"
+      },
+      {
+        "path":"/main/modules/studentInfo/parents",
+        "text":"父母信息"
+      }
+    ]
   },
   {
     "text":"成绩与排名",
     "image":"main/images/studentScoreInfo.png",
-    "path":"/main/modules/studentScoreInfo"
+    "path":"/main/modules/studentScoreInfo",
+    "pages":[
+      {
+        "path":"/main/modules/studentInfo/me",
+        "text":"我的信息"
+      },
+      {
+        "path":"/main/modules/studentInfo/parents",
+        "text":"父母信息"
+      }
+    ]
   },
   {
     "text":"选课结果",
     "image":"main/images/course.png",
-    "path":"/main/modules/course"
-  },
-  {
-    "text":"网上选课",
-    "image":"main/images/courseSelecting.png",
-    "path":"/main/modules/courseSelecting"
+    "path":"/main/modules/course",
+    "pages":[
+      {
+        "path":"/main/modules/course/courseSchedule",
+        "text":"课程列表"
+      },
+      {
+        "path":"/main/modules/course/timetable",
+        "text":"课表"
+      }
+    ]
   },
   {
     "text":"考试相关",
     "image":"main/images/studentTest.png",
-    "path":"/main/modules/studentTest"
+    "path":"/main/modules/studentTest",
+    "pages":[
+      {
+        "path":"/main/modules/studentInfo/me",
+        "text":"我的信息"
+      },
+      {
+        "path":"/main/modules/studentInfo/parents",
+        "text":"父母信息"
+      }
+    ]
   },
   {
     "text":"学费查询",
     "image":"main/images/studentFee.png",
-    "path":"/main/modules/studentFee"
+    "path":"/main/modules/studentFee",
+    "pages":[
+      {
+        "path":"/main/modules/studentInfo/me",
+        "text":"我的信息"
+      },
+      {
+        "path":"/main/modules/studentInfo/parents",
+        "text":"父母信息"
+      }
+    ]
   },
   {
     "text":"课程评价",
     "image":"main/images/assess.png",
-    "path":"/main/modules/assess"
+    "path":"/main/modules/assess",
+    "pages":[
+      {
+        "path":"/main/modules/studentInfo/me",
+        "text":"我的信息"
+      },
+      {
+        "path":"/main/modules/studentInfo/parents",
+        "text":"父母信息"
+      }
+    ]
   },
   {
     "text":"教材登记",
     "image":"main/images/studentBook.png",
-    "path":"/main/modules/studentBook"
-  },
-  {
-    "text":"SPTP科创",
-    "image":"main/images/researchPractice.png",
-    "path":"/main/modules/researchPractice"
-  },
-  {
-    "text":"竞赛活动",
-    "image":"main/images/activityCompetition.png",
-    "path":"/main/modules/activityCompetition"
-  },
-  {
-    "text":"实习安排",
-    "image":"main/images/studentPractice.png",
-    "path":"/main/modules/studentPractice"
-  },
-  {
-    "text":"学业预警",
-    "image":"main/images/studentWarnInfo.png",
-    "path":"/main/modules/studentWarnInfo"
-  },
-  {
-    "text":"第二课堂",
-    "image":"main/images/studentInfo.png",
-    "path":"/main/modules/studentInfo"
-  },
-  {
-    "text":"学习资源",
-    "image":"main/images/studentTeachResource.png",
-    "path":"/main/modules/studentTeachResource"
-  },
-  {
-    "text":"毕业设计",
-    "image":"main/images/studentGraduateDesign.png",
-    "path":"/main/modules/studentGraduateDesign"
-  },
-  {
-    "text":"实验教学",
-    "image":"main/images/studentExperimentInfo.png",
-    "path":"/main/modules/studentExperimentInfo"
-  },
-  {
-    "text":"免研推荐",
-    "image":"main/images/master.png",
-    "path":"/main/modules/master"
+    "path":"/main/modules/studentBook",
+    "pages":[
+      {
+        "path":"/main/modules/studentInfo/me",
+        "text":"我的信息"
+      },
+      {
+        "path":"/main/modules/studentInfo/parents",
+        "text":"父母信息"
+      }
+    ]
   },
   {
     "text":"教学邮箱",
     "image":"main/images/webMessageInfo.png",
-    "path":"/main/modules/webMessageInfo"
+    "path":"/main/modules/webMessageInfo",
+    "pages":[
+      {
+        "path":"/main/modules/studentInfo/me",
+        "text":"我的信息"
+      },
+      {
+        "path":"/main/modules/studentInfo/parents",
+        "text":"父母信息"
+      }
+    ]
   }
 ]

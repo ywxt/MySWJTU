@@ -1,36 +1,54 @@
 package ywxt.myswjtu.models
 
-import javax.xml.bind.annotation.XmlElement
-import javax.xml.bind.annotation.XmlRootElement
+import org.simpleframework.xml.Element
+import org.simpleframework.xml.Root
 
-@XmlRootElement(name = "modelist")
+
+@Root(name = "modelist", strict = false)
 data class UserAccountInfoModel(
-    @XmlElement
-    val selectState:Int,
-    @XmlElement
-    val setAction:String,
-    @XmlElement
-    val email:String?,
-    @XmlElement
-    val qq:String?,
-    @XmlElement
-    val weixinId:String?,
-    @XmlElement
-    val mobilePhone:String?,
-    @XmlElement
-    val description:String?,
-    @XmlElement
-    val createTime:String,
-    @XmlElement
-    val lastLoginTime:String,
-    @XmlElement
-    val lastLoginIp:String,
-    @XmlElement
-    val lastLoginArea:String?,
-    @XmlElement
-    val question:String?,
-    @XmlElement
-    val answer:String?,
-    @XmlElement
-    val userImg:String?
-)
+    @field:Element
+    var selectState: Int,
+    @field:Element
+    var setAction: String,
+    @field:Element(data = true,required = false)
+    var email: String?,
+    @field:Element(data = true,required = false)
+    var qq: String?,
+    @field:Element(data = true,required = false)
+    var weixinId: String?,
+    @field:Element(data = true,required = false)
+    var mobilePhone: String?,
+    @field:Element(data = true,required = false)
+    var description: String?,
+    @field:Element(data = true,required = false)
+    var createTime: String,
+    @field:Element(data = true,required = false)
+    var lastLoginTime: String,
+    @field:Element(data = true,required = false)
+    var lastLoginIp: String,
+    @field:Element(data = true,required = false)
+    var lastLoginArea: String?,
+    @field:Element(data = true,required = false)
+    var question: String?,
+    @field:Element(data = true,required = false)
+    var answer: String?,
+    @field:Element(data = true,required = false)
+    var userImg: String?
+) {
+    constructor() : this(
+        0, 
+        "", 
+        null, 
+        null, 
+        null,
+        null, 
+        null, 
+        "", 
+        "", 
+        "", 
+        null, 
+        null, 
+        null, 
+        null
+    )
+}

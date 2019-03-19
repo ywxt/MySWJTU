@@ -6,19 +6,24 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import org.kodein.di.KodeinAware
 
-abstract class DataBindingActivity<T:ViewDataBinding,E:ViewModel>: BaseActivity(), KodeinAware {
-    
-    
-    abstract val viewModel:E
+abstract class DataBindingActivity<T : ViewDataBinding, E : ViewModel> : BaseActivity(), KodeinAware {
 
-    abstract val layoutId:Int
+    private lateinit var dataBinding: T
+
+    abstract val viewModel: E
+
+    abstract val layoutId: Int
 
     abstract fun bindViewModel(dataBinding: T)
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val dataBinding=DataBindingUtil.setContentView<T>(this,layoutId)
+        dataBinding = DataBindingUtil.setContentView(this, layoutId)
         bindViewModel(dataBinding)
     }
-    
+
+    override fun onDestroy() {
+        dataBinding.unbind()
+        super.onDestroy()
+    }
 }

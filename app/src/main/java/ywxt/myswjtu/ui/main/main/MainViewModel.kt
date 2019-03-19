@@ -1,18 +1,19 @@
 package ywxt.myswjtu.ui.main.main
 
-import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
-import org.kodein.di.Kodein
-import org.kodein.di.generic.instance
-import ywxt.myswjtu.common.viewmodels.BaseViewModel
+import ywxt.myswjtu.common.ui.BaseFragment
+import ywxt.myswjtu.common.viewmodels.BaseFragmentViewModel
 import ywxt.myswjtu.managers.ConfigurationManager
 import ywxt.myswjtu.models.MainModuleModel
 
-class MainViewModel(application: Application):BaseViewModel(application) {
-    override val kodein: Kodein=parentKodein
-    private val configurationManager:ConfigurationManager by instance()
-    val moduleList:MutableLiveData<List<MainModuleModel>> = MutableLiveData()
+class MainViewModel(
+    fragment: BaseFragment
+) : BaseFragmentViewModel(fragment) {
+    private val configurationManager: ConfigurationManager by instance()
+
+    val moduleList: MutableLiveData<List<MainModuleModel>> = MutableLiveData()
+
     init {
         initModules()
     }
@@ -20,11 +21,11 @@ class MainViewModel(application: Application):BaseViewModel(application) {
     /**
      * 加载模块
      */
-    fun initModules(){
+    fun initModules() {
         configurationManager.getMainModules()
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { 
-                moduleList.value=it
+            .subscribe {
+                moduleList.value = it
             }
     }
 }

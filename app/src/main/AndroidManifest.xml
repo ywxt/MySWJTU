@@ -32,6 +32,10 @@
         >
         </activity>
         <activity android:name=".ui.modules.ModuleActivity"
-                  android:theme="@style/AppTheme.NoActionBar"/>
+                  android:theme="@style/AppTheme.NoActionBar"
+        android:parentActivityName=".ui.main.MainActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".ui.main.MainActivity"/>
+        </activity>
     </application>
 </manifest>

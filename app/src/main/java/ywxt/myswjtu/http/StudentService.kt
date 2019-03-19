@@ -12,4 +12,5 @@ interface StudentService {
     
     @GET("StudentInfoAction?setAction=studentParentInfo")
     fun getStuentParents(): Flowable<ResponseBody>
+    
 }

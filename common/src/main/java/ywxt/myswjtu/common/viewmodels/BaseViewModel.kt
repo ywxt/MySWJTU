@@ -1,10 +1,11 @@
 package ywxt.myswjtu.common.viewmodels
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.support.kodein
+import androidx.lifecycle.ViewModel
+import org.kodein.di.Kodein
+import org.kodein.di.generic.bind
 
-abstract class BaseViewModel(application: Application) : AndroidViewModel(application), KodeinAware {
-    protected val parentKodein by kodein()
+abstract class BaseViewModel : ViewModel()
+
+inline fun <reified T : BaseViewModel> Kodein.Builder.bindViewModel(overrides: Boolean? = null): Kodein.Builder.TypeBinder<T> {
+    return bind<T>(T::class.java.name, overrides)
 }

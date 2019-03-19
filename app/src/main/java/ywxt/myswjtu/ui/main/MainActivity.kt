@@ -12,10 +12,6 @@ import ywxt.myswjtu.R
 import ywxt.myswjtu.common.adapters.FragmentAdapter
 import ywxt.myswjtu.common.ui.BaseActivity
 import ywxt.myswjtu.modules.*
-import ywxt.myswjtu.ui.main.main.MainFragment
-import ywxt.myswjtu.ui.main.notification.NotificationFragment
-import ywxt.myswjtu.ui.main.setting.SettingFragment
-import ywxt.myswjtu.ui.main.timetable.TimetableFragment
 
 @Route(path = PATH_ROUTE_MAIN)
 class MainActivity : BaseActivity() {

@@ -15,16 +15,21 @@ import org.kodein.di.generic.singleton
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.jaxb.JaxbConverterFactory
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import ywxt.myswjtu.common.BASE_URL
 import ywxt.myswjtu.common.INTENT_TIME_OUT
 import java.util.concurrent.TimeUnit
 
 const val HTTP_MODULE_NAME = "HTTP_MODULE_NAME"
+const val RETROFIT_JSON = "RETROFIT_JSON"
+const val RETROFIT_XML = "RETROFIT_XML"
+const val RETROFIT_HTML = "RETROFIT_HTML"
+
 /**
  * Http模块
  */
 val HttpModule = Kodein.Module(HTTP_MODULE_NAME) {
+
 
     bind<Retrofit.Builder>() with provider { Retrofit.Builder() }
 
@@ -49,9 +54,33 @@ val HttpModule = Kodein.Module(HTTP_MODULE_NAME) {
             .baseUrl(BASE_URL)
             .client(instance())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .addConverterFactory(JaxbConverterFactory.create())
             .addConverterFactory(FruitConverterFactory.create())
+            .addConverterFactory(SimpleXmlConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+    bind<Retrofit>(RETROFIT_HTML) with singleton {
+        instance<Retrofit.Builder>()
+            .baseUrl(BASE_URL)
+            .client(instance())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(FruitConverterFactory.create())
+            .build()
+    }
+    bind<Retrofit>(RETROFIT_JSON) with singleton {
+        instance<Retrofit.Builder>()
+            .baseUrl(BASE_URL)
+            .client(instance())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+    bind<Retrofit>(RETROFIT_XML) with singleton {
+        instance<Retrofit.Builder>()
+            .baseUrl(BASE_URL)
+            .client(instance())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(SimpleXmlConverterFactory.create())
             .build()
     }
 }

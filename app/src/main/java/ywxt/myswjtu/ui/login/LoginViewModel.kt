@@ -1,6 +1,5 @@
 package ywxt.myswjtu.ui.login
 
-import android.app.Application
 import android.content.Intent
 import android.graphics.Bitmap
 import android.util.Log
@@ -8,20 +7,22 @@ import androidx.lifecycle.MutableLiveData
 import com.alibaba.android.arouter.launcher.ARouter
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import org.kodein.di.Kodein
-import org.kodein.di.generic.instance
 import ywxt.myswjtu.checkers.LoginChecker
 import ywxt.myswjtu.common.exceptions.LoginException
-import ywxt.myswjtu.common.viewmodels.BaseViewModel
+import ywxt.myswjtu.common.ui.BaseFragment
+import ywxt.myswjtu.common.viewmodels.BaseFragmentViewModel
+import ywxt.myswjtu.managers.ToastManager
 import ywxt.myswjtu.managers.UserManager
 import ywxt.myswjtu.modules.PATH_ROUTE_MAIN
 
-class LoginViewModel(application: Application) : BaseViewModel(application) {
-    override val kodein: Kodein = parentKodein
+class LoginViewModel(
+    fragment: BaseFragment
+) : BaseFragmentViewModel(fragment) {
 
-    private val loginChecker by instance<LoginChecker>()
-    private val userManager by instance<UserManager>()
+    private val loginChecker: LoginChecker by instance()
+    private val userManager: UserManager by instance()
     private val router: ARouter by instance()
+    private val toastManager: ToastManager by instance()
 
     val username: MutableLiveData<String> = MutableLiveData()
     val password: MutableLiveData<String> = MutableLiveData()
@@ -52,16 +53,18 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
     fun login() {
         if (!checkUsername() || !checkPassword() || !checkVerifyCode()) return
-        Log.i("LoginViewModel", "login")
-        userManager.login(username.value!!, password.value!!, verifyCode.value!!)
+
+        Flowable.concat(
+            userManager.login(username.value!!, password.value!!, verifyCode.value!!),
+            userManager.loadingAfterLogin()
+        )
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Log.i("Login.OnNext", it.getOrDefault(""))
+            .doOnComplete {
                 navigate2Main()
-            }, {
-                if (it is LoginException)
-                    Log.i("Login.OnError", "${it.message}   ${it.code}")
-            })
+            }
+            .subscribe({}, {
+                    toastManager.toast(it.localizedMessage)
+                })
     }
 
     fun checkUsername(): Boolean {
@@ -104,8 +107,8 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             )
 
     }
-    
-    private fun navigate2Main(){
+
+    private fun navigate2Main() {
         router.build(PATH_ROUTE_MAIN)
             .withFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             .navigation()

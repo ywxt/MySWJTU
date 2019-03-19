@@ -1,13 +1,14 @@
 package ywxt.myswjtu.models
 
-import javax.xml.bind.annotation.XmlElement
-import javax.xml.bind.annotation.XmlRootElement
+import org.simpleframework.xml.Element
+import org.simpleframework.xml.Root
 
-@XmlRootElement(name = "modelist")
+
+@Root(name = "modelist",strict = false)
 data class XmlResult<T> (
-    @XmlElement
+    @Element
     val selectState:Int,
-    @XmlElement
+    @Element
     val setAction:Int,
     val data:T
 )

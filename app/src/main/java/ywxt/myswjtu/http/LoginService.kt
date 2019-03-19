@@ -32,4 +32,16 @@ interface LoginService {
      */
     @GET("StartCaptchaServlet")
     fun  init():Flowable<LoginInitModel>
+    
+    @POST("UserLoadingAction")
+    @FormUrlEncoded
+    @Streaming
+    fun loadingAfterLogin(
+        @Field("url")
+        url:String?,
+        @Field("returnUrl")
+        returnUrl:String?,
+        @Field("loginMsg")
+        msg:String?
+    ):Flowable<ResponseBody>
 }

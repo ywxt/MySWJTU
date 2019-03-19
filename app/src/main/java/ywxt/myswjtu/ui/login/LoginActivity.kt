@@ -17,7 +17,7 @@ class LoginActivity : BaseActivity() {
     override val kodein: Kodein = Kodein.lazy {
         extend(parentKodein)
     }
-    private val router by kodein.instance<ARouter>()
+    private val router by instance<ARouter>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
