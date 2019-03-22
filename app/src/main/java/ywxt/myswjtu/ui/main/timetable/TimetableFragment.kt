@@ -1,41 +1,32 @@
 package ywxt.myswjtu.ui.main.timetable
 
-import android.content.Context
-import android.net.Uri
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
+import org.kodein.di.Kodein
+import org.kodein.di.generic.instance
 import ywxt.myswjtu.R
+import ywxt.myswjtu.common.ui.DataBindingFragment
+import ywxt.myswjtu.databinding.FragmentTimetableBinding
 import ywxt.myswjtu.modules.PATH_ROUTE_MAIN_TIMETABLE
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [TimetableFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [TimetableFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 @Route(path = PATH_ROUTE_MAIN_TIMETABLE)
-class TimetableFragment : Fragment() {
-    
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_timetable, container, false)
+class TimetableFragment : DataBindingFragment<FragmentTimetableBinding,TimetableViewModel>() {
+    override val viewModel: TimetableViewModel by instance()
+    override val layoutId: Int = R.layout.fragment_timetable
+
+    override fun bindViewModel(dataBinding: FragmentTimetableBinding?) {
+        if (dataBinding==null) return
+        dataBinding.vm=viewModel
+        viewModel.timetable.observe(this, Observer{
+            dataBinding.idTimetableView.source(it)
+        })
     }
 
+    override val kodein: Kodein = Kodein.lazy { 
+        extend(parentKodein)
+        import(timetableModule)
+    }
+
+    
 
 }

@@ -10,23 +10,27 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
         <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:orientation="vertical">
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="3dp"
                     android:text="@{vm.user.name}"
                     style="@style/Base.TextAppearance.AppCompat.Large"/>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{vm.user.number}"
-                    android:textColor="@color/app_gray"/>
+                    android:padding="3dp"
+                    android:text="@{vm.user.number}"/>
         </LinearLayout>
         <com.leon.lib.settingview.LSettingItem
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
+                leno:leftIcon="@drawable/ic_more_horiz_black"
                 leno:leftText="详细资料"
 
         />

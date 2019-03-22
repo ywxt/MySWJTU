@@ -10,6 +10,11 @@ data class CourseModel(
     @Pick("td:nth-child(5)")
     val name: String = "",
     /**
+     * 课程代码
+     */
+    @Pick("td:nth-child(4)")
+    val code: Int = 0,
+    /**
      * 任课老师
      */
     @Pick("td:nth-child(8)")

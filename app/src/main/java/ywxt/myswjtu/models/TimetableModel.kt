@@ -2,7 +2,6 @@ package ywxt.myswjtu.models
 
 import com.zhuangfei.timetable.model.Schedule
 import com.zhuangfei.timetable.model.ScheduleEnable
-import kotlin.random.Random
 
 data class TimetableModel(
     /**
@@ -32,10 +31,14 @@ data class TimetableModel(
     /**
      * 星期几
      */
-    val day: Int
+    val day: Int,
+    /**
+     * 课程颜色
+     */
+    val color: Int
 
 ) : ScheduleEnable {
-    
+
     override fun getSchedule(): Schedule = Schedule().apply {
         name = this@TimetableModel.name
         teacher = this@TimetableModel.teacher
@@ -44,6 +47,6 @@ data class TimetableModel(
         step = this@TimetableModel.step
         weekList = this@TimetableModel.weekList
         day = this@TimetableModel.day
-        colorRandom = Random.nextInt(0, 0xffffff)
+        colorRandom = this@TimetableModel.color
     }
 }

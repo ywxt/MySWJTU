@@ -26,10 +26,8 @@ class MainActivity : BaseActivity() {
 
     private val fragmentList by lazy {
         listOf(
-            router.build(PATH_ROUTE_MAIN_MAIN).navigation() as Fragment,
             router.build(PATH_ROUTE_MAIN_TIMETABLE).navigation() as Fragment,
-            router.build(PATH_ROUTE_MAIN_NOTIFICATION).navigation() as Fragment,
-            router.build(PATH_ROUTE_MAIN_SETTING).navigation() as Fragment
+            router.build(PATH_ROUTE_MAIN_ME).navigation() as Fragment
         )
     }
 
@@ -37,21 +35,12 @@ class MainActivity : BaseActivity() {
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.navigation_home -> {
+            R.id.navigation_timetable -> {
                 viewPager.currentItem = 0
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_timetable -> {
+            R.id.navigation_me -> {
                 viewPager.currentItem = 1
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_notifications -> {
-                viewPager.currentItem = 2
-                return@OnNavigationItemSelectedListener true
-            }
-
-            R.id.navigation_setting -> {
-                viewPager.currentItem = 3
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -75,13 +64,10 @@ class MainActivity : BaseActivity() {
 
             override fun onPageSelected(position: Int) {
                 when (position) {
-                    0 -> navigation.selectedItemId = R.id.navigation_home
-                    1 -> navigation.selectedItemId = R.id.navigation_timetable
-                    2 -> navigation.selectedItemId = R.id.navigation_notifications
-                    3 -> navigation.selectedItemId = R.id.navigation_setting
+                    0 -> navigation.selectedItemId = R.id.navigation_timetable
+                    1 -> navigation.selectedItemId = R.id.navigation_me
                 }
             }
-
         })
     }
 }

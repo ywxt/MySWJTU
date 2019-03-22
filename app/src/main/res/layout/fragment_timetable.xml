@@ -2,17 +2,26 @@
 <layout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools">
-    <data></data>
-    <FrameLayout
+    <data>
+        <variable name="vm" type="ywxt.myswjtu.ui.main.timetable.TimetableViewModel"/>
+    </data>
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             tools:context=".ui.main.main.TimetableFragment">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <com.zhuangfei.timetable.view.WeekView
+                android:id="@+id/id_weekview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <com.zhuangfei.timetable.TimetableView
+                android:id="@+id/id_timetableView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/hello_blank_fragment"/>
+                android:background="@color/design_default_color_background">
+        </com.zhuangfei.timetable.TimetableView>
 
-    </FrameLayout>
+    </LinearLayout>
 </layout>

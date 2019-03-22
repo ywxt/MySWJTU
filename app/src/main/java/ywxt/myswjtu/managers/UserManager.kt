@@ -19,7 +19,7 @@ class UserManager(
     private val loginService: LoginService,
     private val xmlUserService: XmlUserService,
     private val htmlUserService: HtmlUserService,
-    private val courseService: CourseService,
+   
     private val toastManager: ToastManager
 ) {
 
@@ -111,10 +111,5 @@ class UserManager(
             
     }
 
-    fun getCourseSchedule(): Flowable<CourseScheduleModel> {
-        return courseService.getCourseSchedule()
-            .subscribeOn(Schedulers.io())
-
-    }
-
+    
 }
