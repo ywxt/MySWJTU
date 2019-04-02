@@ -8,7 +8,6 @@ import com.alibaba.android.arouter.launcher.ARouter
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import ywxt.myswjtu.checkers.LoginChecker
-import ywxt.myswjtu.common.exceptions.LoginException
 import ywxt.myswjtu.common.ui.BaseFragment
 import ywxt.myswjtu.common.viewmodels.BaseFragmentViewModel
 import ywxt.myswjtu.managers.ToastManager

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+            android:key="setting_timetable"
+            android:title="@string/title_timetable"
+    >
+        <SwitchPreference
+                android:summary="@string/setting_summary_showAllCourses"
+                android:key="setting_timetable_showAllCourses"
+                android:title="@string/setting_showAllCourses"/>
+        <SwitchPreference
+            android:summary="@string/setting_summary_notify"
+            android:key="setting_time_notify"
+            android:title="@string/setting_notify"/>
+        <EditTextPreference 
+                android:key="setting_time_notify_time"
+                android:dependency="setting_time_notify"
+                />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="setting_about"
+        android:title="@string/setting_about">
+        <Preference
+            android:key="setting_about_version"
+            android:title="@string/setting_about_version"/>
+    </PreferenceCategory>
+</PreferenceScreen>

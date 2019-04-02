@@ -6,10 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import ywxt.myswjtu.common.ui.BaseFragment
 import ywxt.myswjtu.common.viewmodels.BaseFragmentViewModel
 import ywxt.myswjtu.managers.ToastManager
-import ywxt.myswjtu.managers.UserManager
-import ywxt.myswjtu.models.UserModel
 import java.io.FileNotFoundException
-import java.io.IOException
 
 class MeViewModel(fragment: BaseFragment) : BaseFragmentViewModel(fragment) {
     private val dataSource: MeDataSource by instance()

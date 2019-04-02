@@ -17,6 +17,7 @@ const val PATH_ROUTE_MODULE_TIMETABLE="/main/modules/course/timetable"
 const val PATH_ROUTE_MODULE="/main/modules"
 const val PATH_ROUTE_LOGIN_FRAGMENT="/login/fragment"
 const val NAME_INTERCEPTOR_LOGIN="LOGIN_INTERCEPTOR"
+const val PATH_ROUTE_SETTING="/main/main/me/setting"
 val routerModule= Kodein.Module(ROUTER_MODULE_NAME){
     bind<ARouter>() with singleton { ARouter.getInstance() }
 }

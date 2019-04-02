@@ -8,7 +8,7 @@
     </data>
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
         <LinearLayout
                 android:layout_margin="5dp"
@@ -19,15 +19,21 @@
             <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:padding="3dp"
-                    android:imageSrc="@{vm.image}"
-                    style="@style/Base.TextAppearance.AppCompat.Large"/>
+                   android:id="@+id/image_head"/>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:padding="3dp"
                     android:text="@{vm.name}"/>
         </LinearLayout>
-       
+       <FrameLayout
+               android:id="@+id/setting_container"
+               android:layout_width="match_parent" 
+               android:layout_height="match_parent">
+           
+       </FrameLayout>
     </LinearLayout>
 </layout>

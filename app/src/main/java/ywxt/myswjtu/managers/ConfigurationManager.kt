@@ -9,7 +9,6 @@ import io.reactivex.schedulers.Schedulers
 import ywxt.myswjtu.models.MainModuleModel
 import ywxt.myswjtu.models.TimetableModel
 import ywxt.myswjtu.models.UserModel
-import ywxt.myswjtu.modules.userModule
 
 const val TIMETABLE_FILE_NAME = "timetable.json"
 const val TIMETABLE_WEEK_NAME = "currentWeek"

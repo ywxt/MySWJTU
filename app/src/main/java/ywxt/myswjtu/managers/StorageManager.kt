@@ -2,22 +2,15 @@ package ywxt.myswjtu.managers
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
-import android.content.Context.MODE_WORLD_WRITEABLE
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.core.content.edit
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
-import me.ghui.fruit.reflect.TypeToken
-import ywxt.myswjtu.models.MainModuleModel
-import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
-import java.util.stream.Stream
 
 class StorageManager(
     private val context: Context

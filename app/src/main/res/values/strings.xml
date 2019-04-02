@@ -13,4 +13,10 @@
     <string name="title_timetable">课表</string>
     <string name="module_icon">模块</string>
     <string name="title_me">我</string>
+    <string name="setting_showAllCourses">非本周课程</string>
+    <string name="setting_summary_showAllCourses">显示所有课程</string>
+    <string name="setting_summary_notify">上课之前提示</string>
+    <string name="setting_notify">课前提示</string>
+    <string name="setting_about">关于</string>
+    <string name="setting_about_version">版本</string>
 </resources>

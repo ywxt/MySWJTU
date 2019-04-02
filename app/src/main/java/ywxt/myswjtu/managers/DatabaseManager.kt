@@ -1,4 +1,3 @@
 package ywxt.myswjtu.managers
 
-class DatabaseManager {
-}
+class DatabaseManager 

@@ -3,8 +3,6 @@ package ywxt.myswjtu.common.adapters
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 
 abstract class CommonAdapter<TViewModel,TDataBinding: ViewDataBinding>(

@@ -2,18 +2,19 @@ package ywxt.myswjtu.managers
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.lifecycle.MutableLiveData
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 import ywxt.myswjtu.common.exceptions.LoginException
 import ywxt.myswjtu.common.exceptions.ParamInitException
-import ywxt.myswjtu.http.CourseService
 import ywxt.myswjtu.http.HtmlUserService
 import ywxt.myswjtu.http.LoginService
 import ywxt.myswjtu.http.XmlUserService
-import ywxt.myswjtu.models.*
+import ywxt.myswjtu.models.LoginInitModel
+import ywxt.myswjtu.models.UserAccountInfoModel
+import ywxt.myswjtu.models.UserInfoModel
+import ywxt.myswjtu.models.UserModel
 
 class UserManager(
     private val loginService: LoginService,

@@ -1,9 +1,7 @@
 package ywxt.myswjtu.ui.main.main
 
-import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.alibaba.android.arouter.launcher.ARouter
-import org.kodein.di.Kodein
 import ywxt.myswjtu.common.viewmodels.BaseViewModel
 import ywxt.myswjtu.modules.PATH_ROUTE_MODULE
 

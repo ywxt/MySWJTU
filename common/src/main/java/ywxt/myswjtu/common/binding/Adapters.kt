@@ -8,9 +8,6 @@ import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputLayout
-import com.zhuangfei.timetable.TimetableView
-import com.zhuangfei.timetable.model.ScheduleEnable
-import com.zhuangfei.timetable.view.WeekView
 
 @BindingAdapter("android:imageSrc")
 fun setImageViewImage(imageView: ImageView, bitmap: Bitmap?) {
