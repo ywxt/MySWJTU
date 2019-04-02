@@ -3,11 +3,13 @@ package ywxt.myswjtu.managers
 import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
 import ywxt.myswjtu.http.CourseService
+import ywxt.myswjtu.http.XmlUserService
 import ywxt.myswjtu.models.TimetableModel
 import ywxt.myswjtu.utils.TimetableConverter
 
 class TimetableManager(
-    private val courseService: CourseService
+    private val courseService: CourseService,
+    private val xmlUserService: XmlUserService
 ) {
 
     fun getCourseSchedule(): Flowable<List<TimetableModel>> {
@@ -21,8 +23,14 @@ class TimetableManager(
                 }
                 timetables
             }
-            
-
     }
-
+    
+    fun getCurrentWeek():Flowable<Int>{
+        return xmlUserService.getDateInfo()
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.computation())
+            .map {
+                it.weekTeach
+            }
+    }
 }

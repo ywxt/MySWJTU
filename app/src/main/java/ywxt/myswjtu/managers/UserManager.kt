@@ -18,22 +18,12 @@ import ywxt.myswjtu.models.*
 class UserManager(
     private val loginService: LoginService,
     private val xmlUserService: XmlUserService,
-    private val htmlUserService: HtmlUserService,
-   
-    private val toastManager: ToastManager
+    private val htmlUserService: HtmlUserService
 ) {
 
     var signed = false
 
-    val user: UserModel = UserModel(
-        MutableLiveData(),
-        MutableLiveData(),
-        MutableLiveData(),
-        MutableLiveData(),
-        MutableLiveData(),
-        MutableLiveData(),
-        ""
-    )
+    lateinit var user: UserModel
 
     fun login(username: String, password: String, verification: String): Flowable<Result<String>> {
         return loginService.login(username, password, verification)
@@ -49,9 +39,6 @@ class UserManager(
             .doOnNext {
                 if (it.isFailure) throw it.exceptionOrNull()!!
                 signed = true
-            }.doOnError {
-                if (it?.message != null)
-                    toastManager.toast(it.message!!)
             }
     }
 
@@ -65,10 +52,6 @@ class UserManager(
                 bitmap
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnError {
-                if (it?.message != null)
-                    toastManager.toast(it.message!!)
-            }
     }
 
     fun initLogin(): Flowable<LoginInitModel> {
@@ -85,31 +68,28 @@ class UserManager(
             htmlUserService.getUserInfo(),
             xmlUserService.getUserAccountInfo(),
             BiFunction<UserInfoModel, UserAccountInfoModel, UserModel> { userInfoModel, userAccountInfoModel ->
-                user.apply {
-                    number.postValue(userInfoModel.number)
-                    name.postValue(userInfoModel.name)
-                    image.postValue(userAccountInfoModel.userImg)
-                    email.postValue(userAccountInfoModel.email)
-                    qq.postValue(userAccountInfoModel.qq)
-                    mobilePhone.postValue(userAccountInfoModel.mobilePhone)
-                }
+                user = UserModel(
+                    number = userInfoModel.number,
+                    name = userInfoModel.name,
+                    image = userAccountInfoModel.userImg,
+                    email = userAccountInfoModel.email,
+                    qq = userAccountInfoModel.qq,
+                    mobilePhone = userAccountInfoModel.mobilePhone,
+                    cookie = ""
+                )
+                user
             })
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnError {
-                if (it?.message != null)
-                    toastManager.toast(it.message!!)
-            }
     }
 
-    fun loadingAfterLogin():Flowable<Boolean>{
-        return loginService.loadingAfterLogin(null,null,null)
+    fun loadingAfterLogin(): Flowable<Boolean> {
+        return loginService.loadingAfterLogin(null, null, null)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map { true }
-            .doOnError { toastManager.toast("登录失败") }
-            
+
     }
 
-    
+
 }

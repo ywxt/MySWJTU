@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools" xmlns:leno="http://schemas.android.com/apk/res-auto">
+        xmlns:tools="http://schemas.android.com/tools" 
+       >
     <data>
         <variable name="vm" type="ywxt.myswjtu.ui.main.me.MeViewModel"/>
     </data>
@@ -15,29 +16,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:orientation="vertical">
-            <TextView
+            <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="3dp"
-                    android:text="@{vm.user.name}"
+                    android:imageSrc="@{vm.image}"
                     style="@style/Base.TextAppearance.AppCompat.Large"/>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="3dp"
-                    android:text="@{vm.user.number}"/>
+                    android:text="@{vm.name}"/>
         </LinearLayout>
-        <com.leon.lib.settingview.LSettingItem
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                leno:leftIcon="@drawable/ic_more_horiz_black"
-                leno:leftText="详细资料"
-
-        />
-        <com.leon.lib.settingview.LSettingItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                leno:leftIcon="@drawable/ic_menu_manage"
-                leno:leftText="设置"/>
+       
     </LinearLayout>
 </layout>

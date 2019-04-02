@@ -1,13 +1,11 @@
 package ywxt.myswjtu.models
 
-import androidx.lifecycle.MutableLiveData
-
 data class UserModel (
-    val number:MutableLiveData<String>,
-    val name:MutableLiveData<String>,
-    val image:MutableLiveData<String>,
-    val email:MutableLiveData<String>,
-    val qq:MutableLiveData<String>,
-    val mobilePhone:MutableLiveData<String>,
+    val number:String,
+    val name:String,
+    val image:String?,
+    val email:String?,
+    val qq:String?,
+    val mobilePhone:String?,
     var cookie:String
 )

@@ -2,6 +2,7 @@ package ywxt.myswjtu.managers
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import android.content.Context.MODE_WORLD_WRITEABLE
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -13,7 +14,9 @@ import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
 import me.ghui.fruit.reflect.TypeToken
 import ywxt.myswjtu.models.MainModuleModel
+import java.io.IOException
 import java.io.InputStream
+import java.io.OutputStream
 import java.util.stream.Stream
 
 class StorageManager(
@@ -35,15 +38,20 @@ class StorageManager(
 
     }
 
+    fun getSharedPreferencesInt(name: String): Int =
+        context.getSharedPreferences(name, MODE_PRIVATE).getInt(name, 0)
+
+
     fun writeSharedPreferences(name: String, commit: Boolean = false, edit: SharedPreferences.Editor.() -> Unit) {
         context.getSharedPreferences(name, MODE_PRIVATE).edit(commit, edit)
     }
-    
 
-    fun getStreamFromAssets(fileName: String): Flowable<InputStream> {
+
+    fun getStream(fileName: String): Flowable<InputStream> {
         return Flowable.create<InputStream>({
-            val stream = context.resources.assets.open(fileName)
+            val stream: InputStream = context.openFileInput(fileName)
             it.onNext(stream)
+            
         }, BackpressureStrategy.BUFFER)
             .subscribeOn(Schedulers.io())
     }
@@ -51,8 +59,8 @@ class StorageManager(
     /**
      * 小文件
      */
-    fun getByteArrayFromAssets(fileName: String): Flowable<ByteArray> {
-        return getStreamFromAssets(fileName)
+    fun getByteArray(fileName: String): Flowable<ByteArray> {
+        return getStream(fileName)
             .observeOn(Schedulers.io())
             .map {
                 val length = it.available()
@@ -67,19 +75,38 @@ class StorageManager(
     /**
      * 小文件
      */
-    fun getStringFromAsssets(fileName: String): Flowable<String> {
-        return getByteArrayFromAssets(fileName)
+    fun getString(fileName: String): Flowable<String> {
+        return getByteArray(fileName)
             .observeOn(Schedulers.computation())
             .map {
                 String(it)
             }
     }
 
+    fun writeString(fileName: String, content: String): Flowable<Boolean> {
+        return writeStream(fileName)
+            .observeOn(Schedulers.io())
+            .map {
+                it.write(content.toByteArray())
+                it.close()
+                true
+            }
+    }
+
+    fun writeStream(fileName: String): Flowable<OutputStream> {
+        return Flowable.create<OutputStream>(
+            {
+                val stream = context.openFileOutput(fileName, Context.MODE_PRIVATE)
+                it.onNext(stream)
+            }, BackpressureStrategy.BUFFER
+        ).subscribeOn(Schedulers.io())
+    }
+
     /**
      * 小图片
      */
-    fun getBitmapFromAssets(fileName: String): Flowable<Bitmap> {
-        return getStreamFromAssets(fileName)
+    fun getBitmap(fileName: String): Flowable<Bitmap> {
+        return getStream(fileName)
             .observeOn(Schedulers.io())
             .map {
                 val bitmap = BitmapFactory.decodeStream(it)

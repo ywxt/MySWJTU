@@ -9,12 +9,49 @@ import java.lang.StringBuilder
  * 解析课表
  */
 object TimetableConverter {
-    
+
     fun converter(courseModel: CourseModel): List<TimetableModel> {
         val timetables = mutableListOf<TimetableModel>()
-        val timeAndPlace = courseModel.timeAndPlace.lines()
-
-        if (timeAndPlace.isNullOrEmpty() || timeAndPlace.size == 1) {
+        val timeAndPlace = courseModel.timeAndPlace
+        try {
+            val tmpTime = timeAndPlace.split(' ')
+            when {
+                tmpTime.size == 2 -> {
+                    val weeks = if (tmpTime.isNotEmpty()) getWeek(tmpTime[0]) else listOf()
+                    val room = getRoom(tmpTime[1])
+                    val color = getColor(courseModel.code)
+                    timetables += TimetableModel(
+                        weekList = weeks,
+                        day = 0,
+                        start = 0,
+                        step = 0,
+                        room = room,
+                        color = color,
+                        name = courseModel.name,
+                        teacher = courseModel.teacher
+                    )
+                }
+                tmpTime.size >= 4 -> {
+                    for (t in 0 until tmpTime.size step 4) {
+                        val weeks = getWeek(tmpTime[t])
+                        val day = getDay(tmpTime[t + 1])
+                        val (start, step) = getStartAndStep(tmpTime[t + 2])
+                        val room = getRoom(tmpTime[t + 3])
+                        val color = getColor(courseModel.code)
+                        timetables += TimetableModel(
+                            weekList = weeks,
+                            day = day,
+                            start = start,
+                            step = step,
+                            room = room,
+                            color = color,
+                            name = courseModel.name,
+                            teacher = courseModel.teacher
+                        )
+                    }
+                }
+            }
+        } catch (e: Exception) {
             return timetables.apply {
                 add(
                     TimetableModel(
@@ -30,28 +67,8 @@ object TimetableConverter {
                 )
             }
         }
-        for (line in 0 until timeAndPlace.size step 2) {
-            val tmpTime = timeAndPlace[line].split(' ')
-            val weeks = if (tmpTime.isNotEmpty()) getWeek(tmpTime[0]) else listOf()
-
-            val day = if (tmpTime.size > 1) getDay(tmpTime[1]) else 0
-
-            val (start, step) = if (tmpTime.size > 2) getStartAndStep(tmpTime[2]) else Pair(0, 0)
-            val room = getRoom(timeAndPlace[line + 1])
-            val color = getColor(courseModel.code)
-            timetables += TimetableModel(
-                weekList = weeks,
-                day = day,
-                start = start,
-                step = step,
-                room = room,
-                color = color,
-                name = courseModel.name,
-                teacher = courseModel.teacher
-            )
-
-        }
         return timetables
+
     }
 
     private fun getRoom(text: String): String = text
@@ -83,7 +100,7 @@ object TimetableConverter {
 
     private fun getStartAndStep(text: String): Pair<Int, Int> {
         val tmpText = StringBuilder(text)
-        if (tmpText.endsWith('周')) tmpText.deleteCharAt(tmpText.lastIndex)
+        if (tmpText.endsWith('节')) tmpText.deleteCharAt(tmpText.lastIndex)
         return try {
             val weeks: List<String> = tmpText.split('-')
             Pair(weeks[0].toInt(), weeks[1].toInt() - weeks[0].toInt() + 1)
@@ -98,21 +115,21 @@ object TimetableConverter {
      */
     private fun chineseWeekToNumber(text: Char): Int {
         return when (text) {
-            '一' -> 0
+            '一' -> 1
 
-            '二' -> 1
+            '二' -> 2
 
-            '三' -> 2
+            '三' -> 3
 
-            '四' -> 3
+            '四' -> 4
 
-            '五' -> 4
+            '五' -> 5
 
-            '六' -> 5
+            '六' -> 6
 
-            '天' -> 6
+            '天' -> 7
 
-            '日' -> 6
+            '日' -> 7
 
             else -> 0
         }

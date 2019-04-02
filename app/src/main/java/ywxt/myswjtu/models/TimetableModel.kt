@@ -39,6 +39,8 @@ data class TimetableModel(
 
 ) : ScheduleEnable {
 
+    constructor():this("","","",0,0, listOf(),0,0)
+    
     override fun getSchedule(): Schedule = Schedule().apply {
         name = this@TimetableModel.name
         teacher = this@TimetableModel.teacher
@@ -47,6 +49,6 @@ data class TimetableModel(
         step = this@TimetableModel.step
         weekList = this@TimetableModel.weekList
         day = this@TimetableModel.day
-        colorRandom = this@TimetableModel.color
+        colorRandom = 0//this@TimetableModel.color
     }
 }

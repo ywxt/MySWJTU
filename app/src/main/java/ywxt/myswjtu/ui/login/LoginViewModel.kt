@@ -41,12 +41,10 @@ class LoginViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-
-                    Log.i("Login.Init", "success")
                     if (it is Bitmap) verifyImage.value = it
                 },
                 {
-                    Log.i("Login.Init", it.message)
+                    toastManager.toast(it.localizedMessage)
                 }
             )
     }
@@ -102,7 +100,7 @@ class LoginViewModel(
                 }
                 ,
                 {
-                    // TODO
+                    toastManager.toast(it.localizedMessage)
                 }
             )
 
