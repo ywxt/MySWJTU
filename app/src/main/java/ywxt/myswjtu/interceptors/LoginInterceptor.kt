@@ -1,6 +1,7 @@
 package ywxt.myswjtu.interceptors
 
 import android.content.Context
+import android.content.Intent
 import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.annotation.Interceptor
 import com.alibaba.android.arouter.facade.callback.InterceptorCallback
@@ -29,7 +30,7 @@ class LoginInterceptor : IInterceptor {
             
             if (!userManager.signed) {
                 callback?.onInterrupt(NotSignedException("未登录"))
-                router.build(PATH_ROUTE_LOGIN).navigation(context)
+                router.build(PATH_ROUTE_LOGIN).withFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK).navigation(context)
                 return
             }
             callback?.onContinue(it)

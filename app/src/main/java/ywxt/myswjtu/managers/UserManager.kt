@@ -23,6 +23,7 @@ class UserManager(
 ) {
 
     var signed = false
+    private set(value){field=value}
 
     lateinit var user: UserModel
 
@@ -69,6 +70,7 @@ class UserManager(
             htmlUserService.getUserInfo(),
             xmlUserService.getUserAccountInfo(),
             BiFunction<UserInfoModel, UserAccountInfoModel, UserModel> { userInfoModel, userAccountInfoModel ->
+                signed=true
                 user = UserModel(
                     number = userInfoModel.number,
                     name = userInfoModel.name,

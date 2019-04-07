@@ -13,6 +13,7 @@ import ywxt.myswjtu.models.UserModel
 const val TIMETABLE_FILE_NAME = "timetable.json"
 const val TIMETABLE_WEEK_NAME = "currentWeek"
 const val USERMODEL_FILE_NAME = "usermodel.json"
+const val COOKIE_FILE_NAME = "cookie.json"
 
 class ConfigurationManager(
     private val storageManager: StorageManager
@@ -63,5 +64,12 @@ class ConfigurationManager(
     fun writeUser(user: UserModel) {
         storageManager.writeString(USERMODEL_FILE_NAME, Gson().toJson(user))
     }
+
+
+    fun writeCookie(cookie: String) {
+        storageManager.writeString(COOKIE_FILE_NAME, cookie)
+    }
+    
+    fun getCookie():Flowable<String> = storageManager.getString(COOKIE_FILE_NAME)
 
 }

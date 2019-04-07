@@ -2,7 +2,6 @@ package ywxt.myswjtu.managers
 
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import ywxt.myswjtu.models.TimetableConfigurationModel
 
@@ -14,6 +13,7 @@ class TimetableConfiguration(
     val showAllCourse: MutableLiveData<Boolean> = MutableLiveData()
     val notify: MutableLiveData<Boolean> = MutableLiveData()
     val notifyTime: MutableLiveData<Int> = MutableLiveData()
+    val showWeekend: MutableLiveData<Boolean> = MutableLiveData()
 
     init {
         getTimetableConfiguration()
@@ -24,32 +24,35 @@ class TimetableConfiguration(
             .observeOn(Schedulers.computation())
             .map {
                 Gson().fromJson(it, TimetableConfigurationModel::class.java)
-            }.observeOn(AndroidSchedulers.mainThread())
+            }
             .subscribe({
-                showAllCourse.value = it.showAllCourse
-                notify.value = it.notify
-                notifyTime.value = it.notifyTime
+                showAllCourse.postValue(it.showAllCourse)
+                notify.postValue(it.notify)
+                notifyTime.postValue(it.notifyTime)
+                showWeekend.postValue(it.showWeekend)
             }, {
-                showAllCourse.value = true
-                notify.value = false
-                notifyTime.value = 0
+                showAllCourse.postValue(true)
+                notify.postValue(false)
+                notifyTime.postValue(0)
+                showWeekend.postValue(true)
             })
     }
 
-    fun setTimetableConfiguration() {
+    fun saveTimetableConfiguration() {
         val model = TimetableConfigurationModel(
-            showAllCourse = showAllCourse.value?:true,
-            notify = notify.value?:false,
-            notifyTime = notifyTime.value?:0
+            showAllCourse = showAllCourse.value ?: true,
+            notify = notify.value ?: false,
+            notifyTime = notifyTime.value ?: 0,
+            showWeekend = showWeekend.value ?: true
         )
         storageManager.writeString(
             TIMETABLE_CONFIGURATION_FILE, Gson().toJson(
                 model
             )
         ).subscribe({
-            
-        },{
-            
+
+        }, {
+
         })
     }
 }

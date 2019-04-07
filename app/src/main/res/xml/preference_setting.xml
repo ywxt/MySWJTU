@@ -9,6 +9,9 @@
                 android:key="setting_timetable_showAllCourses"
                 android:title="@string/setting_showAllCourses"/>
         <SwitchPreference
+            android:key="setting_timetable_showWeekend"
+            android:title="@string/setting_showWeekend"/>
+        <SwitchPreference
             android:summary="@string/setting_summary_notify"
             android:key="setting_time_notify"
             android:title="@string/setting_notify"/>

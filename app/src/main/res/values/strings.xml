@@ -19,4 +19,5 @@
     <string name="setting_notify">课前提示</string>
     <string name="setting_about">关于</string>
     <string name="setting_about_version">版本</string>
+    <string name="setting_showWeekend">显示周末</string>
 </resources>

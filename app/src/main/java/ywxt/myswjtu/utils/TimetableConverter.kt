@@ -2,8 +2,6 @@ package ywxt.myswjtu.utils
 
 import ywxt.myswjtu.models.CourseModel
 import ywxt.myswjtu.models.TimetableModel
-import java.lang.Exception
-import java.lang.StringBuilder
 
 /**
  * 解析课表
@@ -71,7 +69,7 @@ object TimetableConverter {
 
     }
 
-    private fun getRoom(text: String): String = text
+    private  fun getRoom(text: String): String = text
     private fun getWeek(text: String): List<Int> {
         val tmpText = StringBuilder(text)
         if (tmpText.endsWith('周')) tmpText.deleteCharAt(tmpText.lastIndex)

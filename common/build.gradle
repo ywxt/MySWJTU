@@ -35,6 +35,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation 'com.google.code.gson:gson:2.8.2'
     // 基础组件
     implementation 'org.kodein.di:kodein-di-generic-jvm:6.1.0'
     // Android扩展组件

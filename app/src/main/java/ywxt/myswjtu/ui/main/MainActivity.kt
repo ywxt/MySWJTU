@@ -11,7 +11,9 @@ import org.kodein.di.generic.instance
 import ywxt.myswjtu.R
 import ywxt.myswjtu.common.adapters.FragmentAdapter
 import ywxt.myswjtu.common.ui.BaseActivity
-import ywxt.myswjtu.modules.*
+import ywxt.myswjtu.modules.PATH_ROUTE_MAIN
+import ywxt.myswjtu.modules.PATH_ROUTE_MAIN_ME
+import ywxt.myswjtu.modules.PATH_ROUTE_MAIN_TIMETABLE
 
 @Route(path = PATH_ROUTE_MAIN)
 class MainActivity : BaseActivity() {
@@ -23,6 +25,7 @@ class MainActivity : BaseActivity() {
     private val viewPager by lazy { findViewById<ViewPager>(R.id.main_viewPager) }
 
     private val router: ARouter by instance()
+    
 
     private val fragmentList by lazy {
         listOf(
@@ -70,4 +73,6 @@ class MainActivity : BaseActivity() {
             }
         })
     }
+
+  
 }

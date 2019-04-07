@@ -9,13 +9,14 @@ import org.kodein.di.generic.instance
 import ywxt.myswjtu.R
 import ywxt.myswjtu.common.ui.DataBindingFragment
 import ywxt.myswjtu.databinding.FragmentTimetableBinding
+import ywxt.myswjtu.managers.TimetableConfiguration
 import ywxt.myswjtu.modules.PATH_ROUTE_MAIN_TIMETABLE
 
 @Route(path = PATH_ROUTE_MAIN_TIMETABLE)
 class TimetableFragment : DataBindingFragment<FragmentTimetableBinding, TimetableViewModel>() {
     override val viewModel: TimetableViewModel by instance()
     override val layoutId: Int = R.layout.fragment_timetable
-
+    private val configuration: TimetableConfiguration by instance()
     val dataSource:TimetableDataSource by instance()
     
     override fun bindViewModel(dataBinding: FragmentTimetableBinding?) {
@@ -38,6 +39,14 @@ class TimetableFragment : DataBindingFragment<FragmentTimetableBinding, Timetabl
         viewModel.currentWeek.observe(this, Observer { 
             dataBinding.idTimetableView.curWeek(it).updateView()
             dataBinding.idWeekview.curWeek(it).updateView()
+        })
+        configuration.showAllCourse.observe(this, Observer { 
+            dataBinding.idTimetableView.isShowNotCurWeek(it)
+                .updateView()
+        })
+        configuration.showWeekend.observe(this, Observer { 
+            dataBinding.idTimetableView.isShowWeekends(it)
+                .updateView()
         })
     }
 

@@ -6,30 +6,30 @@
     <data>
         <variable name="vm" type="ywxt.myswjtu.ui.main.timetable.TimetableViewModel"/>
     </data>
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <com.google.android.material.appbar.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout android:layout_width="match_parent"
+                                                         android:layout_height="match_parent">
+        <com.google.android.material.appbar.AppBarLayout android:layout_width="match_parent"
+                                                         android:layout_height="wrap_content">
+          
             <com.zhuangfei.timetable.view.WeekView
                     android:id="@+id/id_weekview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_scrollFlags="scroll"/>
-        </com.google.android.material.appbar.AppBarLayout>
+                    app:layout_scrollFlags="scroll|enterAlways|snap"/>
 
-        <androidx.core.widget.NestedScrollView
-                android:id="@+id/scrollView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.core.widget.NestedScrollView android:layout_width="match_parent"
+                                               android:layout_height="match_parent"
+                                               app:layout_behavior="@string/appbar_scrolling_view_behavior">
             <com.zhuangfei.timetable.TimetableView
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     android:id="@+id/id_timetableView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
             </com.zhuangfei.timetable.TimetableView>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </layout>
