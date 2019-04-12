@@ -13,7 +13,7 @@
         <com.google.android.material.appbar.AppBarLayout android:layout_width="match_parent"
                                                          android:layout_height="wrap_content">
           
-            <com.zhuangfei.timetable.view.WeekView
+            <ywxt.myswjtu.common.views.WeekView
                     android:id="@+id/id_weekview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

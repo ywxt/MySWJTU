@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.zhuangfei.timetable.TimetableView
 import com.zhuangfei.timetable.listener.ISchedule
+import com.zhuangfei.timetable.listener.IWeekView
 import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
 import ywxt.myswjtu.R
@@ -34,11 +35,12 @@ class TimetableFragment : DataBindingFragment<FragmentTimetableBinding, Timetabl
             dataBinding.idWeekview.source(list.filterNot { it.day == 0 || it.step == 0 })
                 .hideLeftLayout()
                 .itemCount(23)
-                .callback { week ->
+                .callback(IWeekView.OnWeekItemClickedListener { week ->
                     dataBinding.idTimetableView.onDateBuildListener()
                         .onUpdateDate(viewModel.currentWeek.value ?: 0, week)
                     dataBinding.idTimetableView.changeWeekOnly(week)
-                }
+
+                })
                 .showView()
             dataBinding.idTimetableView
                 .source(list.filterNot { it.day == 0 || it.step == 0 })
