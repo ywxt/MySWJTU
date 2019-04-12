@@ -1,2 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="ywxt.myswjtu.common"/>
+          package="ywxt.myswjtu.common">
+    <application>
+       
+       
+    </application>
+</manifest>

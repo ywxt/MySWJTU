@@ -1,5 +1,7 @@
 package ywxt.myswjtu.ui.main.timetable
 
+import android.app.AlarmManager
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -12,18 +14,20 @@ import java.io.FileNotFoundException
 class TimetableViewModel(fragment: BaseFragment) : BaseFragmentViewModel(fragment) {
     private val dataSource: TimetableDataSource by instance()
     private val toastManager: ToastManager by instance()
+    private val alarmManager by lazy { fragment.context!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager }
+
     val timetable: MutableLiveData<List<TimetableModel>> = MutableLiveData()
     val currentWeek: MutableLiveData<Int> = MutableLiveData()
 
     init {
-       
+
         getTimetable()
         getWeek()
-       
+
     }
 
 
-    fun getTimetable(){
+    fun getTimetable() {
         Flowable.concatArrayDelayError(
             dataSource.getLocalTimetable(),
             dataSource.getRemoteTimetable()
@@ -41,8 +45,8 @@ class TimetableViewModel(fragment: BaseFragment) : BaseFragmentViewModel(fragmen
                 }
             })
     }
-    
-    fun getWeek(){
+
+    fun getWeek() {
         Flowable.concatArrayDelayError(
             dataSource.getLocalWeek(),
             dataSource.getRemoteWeek()
@@ -56,4 +60,12 @@ class TimetableViewModel(fragment: BaseFragment) : BaseFragmentViewModel(fragmen
 
             })
     }
+
+
+//    fun NofityTimetable() {
+//        
+//        val time = timetable.value!!.filterNot { it.step == 0 || it.day == 0 }
+//        for (i)
+//            
+//    }
 }

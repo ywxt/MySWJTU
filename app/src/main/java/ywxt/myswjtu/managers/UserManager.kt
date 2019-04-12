@@ -7,6 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 import ywxt.myswjtu.common.exceptions.LoginException
+import ywxt.myswjtu.common.exceptions.NotSignedException
 import ywxt.myswjtu.common.exceptions.ParamInitException
 import ywxt.myswjtu.http.HtmlUserService
 import ywxt.myswjtu.http.LoginService
@@ -94,5 +95,13 @@ class UserManager(
 
     }
 
+    fun isValidUser():Flowable<Boolean>{
+        return htmlUserService.getUserInfo()
+            .subscribeOn(Schedulers.io())
+            .map { 
+                if (it.number.isBlank()) throw NotSignedException("未登录")
+                else true
+            }
+    }
 
 }

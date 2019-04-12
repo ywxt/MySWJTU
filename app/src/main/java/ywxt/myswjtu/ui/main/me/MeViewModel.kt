@@ -1,5 +1,6 @@
 package ywxt.myswjtu.ui.main.me
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -47,5 +48,6 @@ class MeViewModel(fragment: BaseFragment) : BaseFragmentViewModel(fragment) {
         super.onCleared()
         timetableConfiguration.saveTimetableConfiguration()
         cookieManager.saveCookie()
+        Log.i("MeViewModel","Clear")
     }
 }

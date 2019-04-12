@@ -6,11 +6,26 @@
     <data>
         <variable name="vm" type="ywxt.myswjtu.ui.splash.SplashViewModel"/>
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.splash.SplashActivity"
-            android:onClick="@{()->vm.navigate2Main()}">
-            
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            tools:context=".ui.splash.SplashActivity" android:orientation="vertical">
+        <ImageView
+                android:scaleType="fitXY"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" app:srcCompat="@drawable/bg"
+                android:layout_weight="1"
+                android:id="@+id/imageView2"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+        />
+        <ImageView
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:tint="@color/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="64dp" app:srcCompat="@drawable/logo"/>
+       
+
+
+    </LinearLayout>
 </layout>

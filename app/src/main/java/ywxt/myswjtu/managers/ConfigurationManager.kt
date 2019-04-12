@@ -67,7 +67,7 @@ class ConfigurationManager(
 
 
     fun writeCookie(cookie: String) {
-        storageManager.writeString(COOKIE_FILE_NAME, cookie)
+        storageManager.writeString(COOKIE_FILE_NAME, cookie).subscribe({},{})
     }
     
     fun getCookie():Flowable<String> = storageManager.getString(COOKIE_FILE_NAME)

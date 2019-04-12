@@ -44,6 +44,7 @@ class StorageManager(
         return Flowable.create<InputStream>({
             val stream: InputStream = context.openFileInput(fileName)
             it.onNext(stream)
+            it.onComplete()
             
         }, BackpressureStrategy.BUFFER)
             .subscribeOn(Schedulers.io())
@@ -91,6 +92,7 @@ class StorageManager(
             {
                 val stream = context.openFileOutput(fileName, Context.MODE_PRIVATE)
                 it.onNext(stream)
+                it.onComplete()
             }, BackpressureStrategy.BUFFER
         ).subscribeOn(Schedulers.io())
     }
