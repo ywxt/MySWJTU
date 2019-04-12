@@ -35,12 +35,17 @@ data class TimetableModel(
     /**
      * 课程颜色
      */
-    val color: Int
+    val color: Int,
+    /**
+     * 自定义
+     */
+    val customized: Boolean
 
 ) : ScheduleEnable {
 
-    constructor():this("","","",0,0, listOf(),0,0)
+    constructor() : this("", "", "", 0, 0, listOf(), 0, 0, false)
     
+
     override fun getSchedule(): Schedule = Schedule().apply {
         name = this@TimetableModel.name
         teacher = this@TimetableModel.teacher
@@ -50,5 +55,6 @@ data class TimetableModel(
         weekList = this@TimetableModel.weekList
         day = this@TimetableModel.day
         colorRandom = 0//this@TimetableModel.color
+        putExtras("customized", customized)
     }
 }

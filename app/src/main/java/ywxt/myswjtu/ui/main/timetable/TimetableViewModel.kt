@@ -16,27 +16,57 @@ class TimetableViewModel(fragment: BaseFragment) : BaseFragmentViewModel(fragmen
     private val toastManager: ToastManager by instance()
     private val alarmManager by lazy { fragment.context!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager }
 
-    val timetable: MutableLiveData<List<TimetableModel>> = MutableLiveData()
+    val timetable: MutableLiveData<MutableList<TimetableModel>> = MutableLiveData()
+
     val currentWeek: MutableLiveData<Int> = MutableLiveData()
 
     init {
 
-        getTimetable()
+        getDefaultTimetable()
         getWeek()
-
+        getCustomizedTimetable()
     }
 
 
-    fun getTimetable() {
+    fun getCustomizedTimetable() {
+        dataSource.getCustomizedTimetable()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ list ->
+                timetable.value?.removeAll {
+                    it.customized
+                }
+                val time = list.toMutableList().apply { addAll(timetable.value ?: listOf()) }
+                timetable.value = time
+
+            }, {
+                when (it) {
+                    is FileNotFoundException -> {
+                    }
+                    else -> {
+                        toastManager.toast("加载自定义课程失败")
+                    }
+                }
+            })
+    }
+
+    fun writeCustomizedTimetable() {
+        dataSource.writeCustomizedTimetable(timetable.value ?: listOf())
+    }
+
+    fun getDefaultTimetable() {
         Flowable.concatArrayDelayError(
             dataSource.getLocalTimetable(),
             dataSource.getRemoteTimetable()
         )
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
+            .subscribe({ list ->
 
-                if (it.isNullOrEmpty()) return@subscribe
-                timetable.value = it
+                if (list.isNullOrEmpty()) return@subscribe
+                timetable.value?.removeAll {
+                    !it.customized
+                }
+                val time = list.toMutableList().apply { addAll(timetable.value ?: listOf()) }
+                timetable.value = time
             }, {
                 when (it) {
                     is FileNotFoundException -> {
@@ -61,6 +91,10 @@ class TimetableViewModel(fragment: BaseFragment) : BaseFragmentViewModel(fragmen
             })
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        writeCustomizedTimetable()
+    }
 
 //    fun NofityTimetable() {
 //        

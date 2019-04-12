@@ -26,7 +26,8 @@ object TimetableConverter {
                         room = room,
                         color = color,
                         name = courseModel.name,
-                        teacher = courseModel.teacher
+                        teacher = courseModel.teacher,
+                        customized = false
                     )
                 }
                 tmpTime.size >= 4 -> {
@@ -44,7 +45,8 @@ object TimetableConverter {
                             room = room,
                             color = color,
                             name = courseModel.name,
-                            teacher = courseModel.teacher
+                            teacher = courseModel.teacher,
+                            customized = false
                         )
                     }
                 }
@@ -60,7 +62,8 @@ object TimetableConverter {
                         step = 0,
                         weekList = listOf(),
                         day = 0,
-                        color = courseModel.code
+                        color = courseModel.code,
+                        customized = false
                     )
                 )
             }
@@ -111,7 +114,7 @@ object TimetableConverter {
     /**
      * 中文星期转数字
      */
-    private fun chineseWeekToNumber(text: Char): Int {
+    fun chineseWeekToNumber(text: Char): Int {
         return when (text) {
             '一' -> 1
 

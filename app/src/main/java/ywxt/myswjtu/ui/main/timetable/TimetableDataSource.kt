@@ -13,13 +13,13 @@ class TimetableDataSource(
 ) {
 
     fun getLocalTimetable(): Flowable<List<TimetableModel>> =
-        configurationManager.getTimetable().onErrorResumeNext(Function {
+        configurationManager.getDefaultTimetable().onErrorResumeNext(Function {
                 Flowable.just(listOf())
             })
 
     fun getRemoteTimetable(): Flowable<List<TimetableModel>> =
         timetableManager.getCourseSchedule().observeOn(Schedulers.io()).doOnNext {
-            configurationManager.writeTimetable(it)
+            configurationManager.writeDefaultTimetable(it)
         }
 
     fun getRemoteWeek(): Flowable<Int> =
@@ -28,5 +28,11 @@ class TimetableDataSource(
     fun getLocalWeek(): Flowable<Int> = configurationManager.getWeek().onErrorResumeNext(Function { 
         Flowable.just(1)
     })
+    
+    fun getCustomizedTimetable():Flowable<List<TimetableModel>> = 
+            configurationManager.getCustomizedTimetable()
+    fun writeCustomizedTimetable(timetable:List<TimetableModel>){
+        configurationManager.writeCustomizedTimetable(timetable)
+    }
 
 }
