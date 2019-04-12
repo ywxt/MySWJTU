@@ -21,4 +21,6 @@
     <string name="setting_about_version">版本</string>
     <string name="setting_showWeekend">显示周末</string>
     <string name="logo">Logo</string>
+    <string name="logo_sishi">竢实扬华</string>
+    <string name="logo_ziqiang">自强不息</string>
 </resources>

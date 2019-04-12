@@ -10,14 +10,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".ui.splash.SplashActivity" android:orientation="vertical">
-        <ImageView
-                android:scaleType="fitXY"
+        <androidx.constraintlayout.widget.ConstraintLayout
+               
                 android:layout_width="match_parent"
-                android:layout_height="0dp" app:srcCompat="@drawable/bg"
+                android:layout_height="0dp" android:background="@drawable/bg"
                 android:layout_weight="1"
-                android:id="@+id/imageView2"
-                app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-        />
+        >
+
+            <ImageView
+                    android:tint="@color/logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" app:srcCompat="@drawable/logo_1"
+                    android:id="@+id/imageView" android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <ImageView
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
