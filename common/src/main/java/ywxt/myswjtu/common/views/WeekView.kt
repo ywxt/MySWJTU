@@ -212,7 +212,7 @@ class WeekView @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
             } else {
                 textViews!![i].text = ""
             }
-            layouts!![i].setBackgroundColor(ContextCompat.getColor(context,R.color.colorAccent))
+            layouts!![i].setBackgroundColor(ContextCompat.getColor(context,R.color.colorWeekBg))
         }
 
         if (curWeek > 0 && curWeek <= layouts!!.size) {
@@ -225,7 +225,7 @@ class WeekView @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
      * 重置背景色
      */
     fun resetBackground() {
-        layouts!![preIndex - 1].setBackgroundColor(ContextCompat.getColor(context,R.color.colorAccent))
+        layouts!![preIndex - 1].setBackgroundColor(ContextCompat.getColor(context,R.color.colorWeekBg))
         layouts!![curWeek - 1].background = ContextCompat.getDrawable(context,R.drawable.ywxt_weekview_thisweek)
     }
 

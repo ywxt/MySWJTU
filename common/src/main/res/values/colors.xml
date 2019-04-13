@@ -2,6 +2,8 @@
 <resources>
     <color name="colorPrimary">#025483</color>
     <color name="colorPrimaryDark">#0B386B</color>
+    <color name="colorWeekBg">#D5E2FF</color>
+    <color name="colorWeekThis">#1976D2</color>
     <color name="colorAccent">#1976D2</color>
     <color name="textColorPrimary">#212121</color>
     <color name="textColorSecondary">#757575</color>
