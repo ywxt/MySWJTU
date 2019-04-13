@@ -46,6 +46,7 @@ class TimetableFragment : DataBindingFragment<FragmentTimetableBinding, Timetabl
                 viewModel.week.value = week
 
             })
+        
         dataBinding.idTimetableView
             .maxSlideItem(13)
             .callback(ISchedule.OnFlaglayoutClickListener { day, start ->
