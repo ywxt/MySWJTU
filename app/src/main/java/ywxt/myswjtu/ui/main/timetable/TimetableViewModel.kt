@@ -1,7 +1,5 @@
 package ywxt.myswjtu.ui.main.timetable
 
-import android.app.AlarmManager
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,8 +12,8 @@ import java.io.FileNotFoundException
 class TimetableViewModel(fragment: BaseFragment) : BaseFragmentViewModel(fragment) {
     private val dataSource: TimetableDataSource by instance()
     private val toastManager: ToastManager by instance()
-    private val alarmManager by lazy { fragment.context!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager }
-
+    //private val alarmManager by lazy { fragment.context!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager }
+    val week: MutableLiveData<Int> = MutableLiveData()
     val timetable: MutableLiveData<MutableList<TimetableModel>> = MutableLiveData()
 
     val currentWeek: MutableLiveData<Int> = MutableLiveData()
@@ -83,6 +81,7 @@ class TimetableViewModel(fragment: BaseFragment) : BaseFragmentViewModel(fragmen
         )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
+                if (week.value == null) week.value = if (it == 0) 1 else it
                 currentWeek.value = it
             }, {
 
